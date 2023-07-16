@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
 import { useUser } from "@/context/user";
 import LogoSD from "./icon/logo";
+import { Dropdown } from "@nextui-org/react";
+import ProfileC from "./Profile";
 export default function NavbarC() {
   const user = getAuth().currentUser;
   const auth = getAuth();
@@ -16,7 +18,7 @@ export default function NavbarC() {
   ];
 
   return (
-    <Navbar isBordered variant="sticky">
+    <Navbar className="shadow-none" variant="sticky">
       <Navbar.Brand>
         <Navbar.Toggle
           aria-label="toggle navigation"
@@ -28,7 +30,7 @@ export default function NavbarC() {
           SDN 42 Kambang Harapan
         </Text>
       </Navbar.Brand>
-      <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
+      <Navbar.Content>
         {navigation.map((e, i) => {
           return (
             <Link
@@ -40,29 +42,7 @@ export default function NavbarC() {
             </Link>
           );
         })}
-        {user ? (
-          <Button
-            onPress={async () => {
-              await signOut(auth);
-            }}
-            className="text-white bg-red-500"
-            size={"sm"}
-          >
-            Keluar
-          </Button>
-        ) : (
-          <Button
-            onPress={() => {
-              route.push("/login");
-            }}
-            flat
-            bordered
-            className="bg-[#172554] text-white"
-            size={"sm"}
-          >
-            Login
-          </Button>
-        )}
+        <ProfileC />
       </Navbar.Content>
 
       <Navbar.Collapse>
