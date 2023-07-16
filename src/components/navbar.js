@@ -1,11 +1,9 @@
-import { Navbar, Button, Text } from "@nextui-org/react";
+import { Navbar, Text } from "@nextui-org/react";
+import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getAuth, signOut } from "firebase/auth";
-import { useUser } from "@/context/user";
-import LogoSD from "./icon/logo";
-import { Dropdown } from "@nextui-org/react";
 import ProfileC from "./Profile";
+import LogoSD from "./icon/logo";
 export default function NavbarC() {
   const user = getAuth().currentUser;
   const auth = getAuth();
