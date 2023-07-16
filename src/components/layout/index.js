@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import NavbarC from "../Navbar";
+
 import FooterC from "../footer";
+import NavbarC from "../Navbar";
 
 export default function Layout({ children }) {
   return (
