@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
 import { useUser } from "@/context/user";
+import LogoSD from "./icon/logo";
 export default function NavbarC() {
   const user = getAuth().currentUser;
   const auth = getAuth();
@@ -21,6 +22,8 @@ export default function NavbarC() {
           aria-label="toggle navigation"
           className="mr-4 sm:hidden"
         />
+        <LogoSD className={"h-10 mr-2"} />
+
         <Text b color="inherit">
           SDN 42 Kambang Harapan
         </Text>
@@ -28,7 +31,11 @@ export default function NavbarC() {
       <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
         {navigation.map((e, i) => {
           return (
-            <Link key={i} href={e.href}>
+            <Link
+              key={i}
+              className={route.pathname != e.href ? "" : "font-bold"}
+              href={e.href}
+            >
               {e.title}
             </Link>
           );
@@ -38,7 +45,7 @@ export default function NavbarC() {
             onPress={async () => {
               await signOut(auth);
             }}
-            className="bg-[#172554] text-white"
+            className="text-white bg-red-500"
             size={"sm"}
           >
             Keluar
@@ -61,17 +68,28 @@ export default function NavbarC() {
       <Navbar.Collapse>
         {navigation.map((item, index) => (
           <Navbar.CollapseItem key={index}>
-            <Link
-              color="inherit"
-              css={{
-                minWidth: "100%",
-              }}
-              href={item.href}
-            >
-              {item.title}
-            </Link>
+            <Link href={item.href}>{item.title}</Link>
           </Navbar.CollapseItem>
         ))}
+        {user ? (
+          <button
+            className="text-lg text-red-500"
+            onClick={async () => {
+              await signOut(auth);
+            }}
+          >
+            Keluar
+          </button>
+        ) : (
+          <button
+            className="text-lg"
+            onClick={() => {
+              route.push("/login");
+            }}
+          >
+            Login
+          </button>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
