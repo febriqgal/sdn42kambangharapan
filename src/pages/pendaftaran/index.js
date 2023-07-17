@@ -46,7 +46,7 @@ const Pendaftaran = () => {
         pekerjaanibu: data.pekerjaanibu,
         nohp: data.nohp,
         pdf: storageRef.name,
-        ket: null,
+        ket: "-",
       });
     };
     toast.promise(push(), {
