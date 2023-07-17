@@ -1,21 +1,20 @@
 import Layout from "@/components/layout";
 import protectLogin from "@/protect/protect-login";
-import { Button, Input } from "@nextui-org/react";
-import React from "react";
-import Head from "next/head";
-import LayoutAdmin from "@/components/layout/layout-admin";
-import app, { db } from "@/server/db";
+import { db } from "@/server/db";
+import app from "@/server/db";
+import { Button } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getAuth } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import Head from "next/head";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Toaster, toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
-import InputC from "@/components/Input";
+import { Toaster, toast } from "react-hot-toast";
+
 const Pendaftaran = () => {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
@@ -23,39 +22,51 @@ const Pendaftaran = () => {
   const uid = uuidv4();
   const auth = getAuth();
   const user = auth.currentUser;
-  const [imageUpload, setImageUpload] = useState();
+  const [imageUpload2, setImageUpload2] = useState();
   const storage = getStorage(app);
-  const storageRef = ref(storage, `image/pengumuman/${uid}`);
+  const storageRef = ref(storage, `image/pendaftaran/${uid}`);
 
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
-      if (imageUpload == null) return;
-      await uploadBytes(storageRef, imageUpload);
-      await addDoc(collection(db, "pengumuman"), {
-        judul: data.judul,
-        isi: data.isi,
-        penulis: "Admin",
-        tanggal_pengumuman: dayjs().format("ddd, MMM D, YYYY HH:mm"),
-        tanggal: dayjs().format(),
-        dilihat: 0,
-        gambar: storageRef.name,
+      await uploadBytes(storageRef, imageUpload2);
+      await addDoc(collection(db, "pendaftaran"), {
+        uid: user.uid,
+        nmlengkap: data.namalengkap,
+        tempatlahir: data.tempatlahir,
+        tgllahir: data.tanggallahir,
+        jeniskelamin: data.jeniskelamin,
+        agama: data.agama,
+        alamat: data.alamat,
+        nik: data.nik,
+        nmayah: data.namaayah,
+        agamaayah: data.agamaayah,
+        pekerjaanayah: data.pekerjaanayah,
+        nmibu: data.namaibu,
+        agamaibu: data.agamaibu,
+        pekerjaanibu: data.pekerjaanibu,
+        nohp: data.nohp,
+        pdf: storageRef.name,
+        ket: null,
       });
-      reset();
     };
     toast.promise(push(), {
       loading: "Mohon tunggu...",
-      success: <b>Berhasil menambahkan pengumuman</b>,
-      error: <b>Terjadi kesalahan, silahkan coba lagi.</b>,
+      success: <b>Berhasil menambahkan pendaftaran</b>,
+      error: <b>Error</b>,
     });
   };
 
   return (
     <Layout>
+      <Toaster />
       <Head>
         <title>Pendaftaran - SDN 42 Kambang Harapan</title>
       </Head>
       <div className="flex items-center justify-center min-h-screen py-5">
-        <form className="grid w-full grid-cols-1 gap-4 px-5 sm:grid-cols-2 sm:max-w-2xl">
+        <form
+          onSubmit={handleSubmit(addDatafromDBFirestore)}
+          className="grid w-full grid-cols-1 gap-4 px-5 sm:grid-cols-2 sm:max-w-2xl"
+        >
           <label
             htmlFor="namalengkap"
             className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
@@ -69,7 +80,7 @@ const Pendaftaran = () => {
               id="namalengkap"
               defaultValue={user?.displayName ?? ""}
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("namalengkap", { required: true })}
+              {...register("namalengkap", { required: false })}
             />
           </label>
           <label
@@ -84,7 +95,7 @@ const Pendaftaran = () => {
               type="text"
               id="tempatlahir"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("tempatlahir", { required: true })}
+              {...register("tempatlahir", { required: false })}
             />
           </label>
           <label
@@ -99,7 +110,7 @@ const Pendaftaran = () => {
               type="date"
               id="tanggallahir"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("tanggallahir", { required: true })}
+              {...register("tanggallahir", { required: false })}
             />
           </label>
           <label
@@ -113,7 +124,7 @@ const Pendaftaran = () => {
             <select
               id="jeniskelamin"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("jeniskelamin", { required: true })}
+              {...register("jeniskelamin", { required: false })}
             >
               <option>-Pilih Jenis Kelamin-</option>
               <option value="Laki - Laki">Laki - Laki</option>
@@ -129,7 +140,7 @@ const Pendaftaran = () => {
             <select
               id="agama"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("agama", { required: true })}
+              {...register("agama", { required: false })}
             >
               <option>-Pilih agama-</option>
               <option value="Islam">Islam</option>
@@ -146,7 +157,7 @@ const Pendaftaran = () => {
               type="text"
               id="alamat"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("alamat", { required: true })}
+              {...register("alamat", { required: false })}
             />
           </label>
           <label
@@ -159,7 +170,7 @@ const Pendaftaran = () => {
               type="number"
               id="nik"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("nik", { required: true })}
+              {...register("nik", { required: false })}
             />
           </label>
           <label
@@ -172,7 +183,7 @@ const Pendaftaran = () => {
               type="text"
               id="namaayah"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("namaayah", { required: true })}
+              {...register("namaayah", { required: false })}
             />
           </label>
           <label
@@ -186,7 +197,7 @@ const Pendaftaran = () => {
             <select
               id="agamaayah"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("agamaayah", { required: true })}
+              {...register("agamaayah", { required: false })}
             >
               <option>-Pilih agama ayah-</option>
               <option value="Islam">Islam</option>
@@ -205,7 +216,7 @@ const Pendaftaran = () => {
               type="text"
               id="pekerjaanayah"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("pekerjaanayah", { required: true })}
+              {...register("pekerjaanayah", { required: false })}
             />
           </label>
           <label
@@ -218,7 +229,7 @@ const Pendaftaran = () => {
               type="text"
               id="namaibu"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("namaibu", { required: true })}
+              {...register("namaibu", { required: false })}
             />
           </label>
           <label
@@ -230,7 +241,7 @@ const Pendaftaran = () => {
             <select
               id="agamaibu"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("agamaibu", { required: true })}
+              {...register("agamaibu", { required: false })}
             >
               <option>-Pilih agama ibu-</option>
               <option value="Islam">Islam</option>
@@ -249,7 +260,7 @@ const Pendaftaran = () => {
               type="text"
               id="pekerjaanibu"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("pekerjaanibu", { required: true })}
+              {...register("pekerjaanibu", { required: false })}
             />
           </label>
           <label
@@ -262,38 +273,28 @@ const Pendaftaran = () => {
               type="tel"
               id="nohp"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("nohp", { required: true })}
+              {...register("nohp", { required: false })}
             />
           </label>
-          <label
-            htmlFor="gambarakta"
-            className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-          >
-            <span className="text-xs font-medium text-gray-700">
-              Gambar Akta
-            </span>
 
-            <input
-              type="file"
-              id="gambarakta"
-              className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("gambarakta", { required: true })}
-            />
-          </label>
           <label
             htmlFor="gambarkk"
             className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
           >
-            <span className="text-xs font-medium text-gray-700">Gambar KK</span>
+            <span className="text-xs font-medium text-gray-700">{`Upload KK & Akta (Jadikan dalam 1 file PDF)`}</span>
 
             <input
               type="file"
               id="gambarkk"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              {...register("gambarkk", { required: true })}
+              onChange={(event) => {
+                setImageUpload2(event.target.files[0]);
+              }}
             />
           </label>
-          <Button className="bg-[#172554] sm:mt-7">Kirim</Button>
+          <Button type="submit" className="bg-[#172554] sm:mt-7">
+            Kirim
+          </Button>
         </form>
       </div>
     </Layout>

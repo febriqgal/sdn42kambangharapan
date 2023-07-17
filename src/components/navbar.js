@@ -16,7 +16,7 @@ export default function NavbarC() {
   ];
 
   return (
-    <Navbar className="shadow-none" variant="sticky">
+    <Navbar variant="sticky">
       <Navbar.Brand>
         <Navbar.Toggle
           aria-label="toggle navigation"
@@ -28,7 +28,7 @@ export default function NavbarC() {
           SDN 42 Kambang Harapan
         </Text>
       </Navbar.Brand>
-      <Navbar.Content>
+      <Navbar.Content className="hidden sm:flex">
         {navigation.map((e, i) => {
           return (
             <Link
