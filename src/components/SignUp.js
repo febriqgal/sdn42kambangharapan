@@ -1,13 +1,14 @@
 import React from "react";
 import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 
 export default function SignUp() {
   const auth = getAuth();
   const { register, handleSubmit, resetField } = useForm();
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
+  const onSubmit = async (data) => {
+   
+  await  createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -22,6 +23,10 @@ export default function SignUp() {
         const errorMessage = error.message;
         alert(errorMessage);
       });
+      await updateProfile(auth.currentUser, {
+        displayName: data.namalengkap,
+      });
+      setVisible(false)
   };
 
   const [visible, setVisible] = React.useState(false);
@@ -47,6 +52,12 @@ export default function SignUp() {
           <h1 className="text-xl">Buat Akun</h1>
         </Modal.Header>
         <Modal.Body>
+        <Input
+              type="text"
+              label="Nama Lengkap"
+              placeholder="Masukkan Nama Lengkap"
+              {...register("namalengkap")}
+            />
           <Input
             label="Email"
             placeholder="Masukkan email"

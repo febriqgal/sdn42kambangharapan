@@ -12,7 +12,7 @@ export default function NavbarC() {
     { title: "Beranda", href: "/" },
     { title: "Pengumuman", href: "/pengumuman" },
     { title: "Hasil Seleksi", href: "/hasil-seleksi" },
-    { title: "Pendaftaran", href: "/pendaftaran" },
+    
   ];
 
   return (

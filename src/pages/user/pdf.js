@@ -1,23 +1,23 @@
-import {
-  Document,
-  Image,
-  PDFViewer,
-  Page,
-  Text,
-  StyleSheet,
-  View,
-} from "@react-pdf/renderer";
-
+import { Document, PDFViewer, Page, Text, View } from "@react-pdf/renderer";
+import dayjs from "dayjs";
+import "dayjs/locale/id";
+import relativeTime from "dayjs/plugin/relativeTime";
 export default function Pdf() {
   const nama = "febriqgal";
+  dayjs.locale("id");
+  dayjs.extend(relativeTime);
   return (
     <PDFViewer className="w-full h-screen">
       <Document>
-        <Page size="A4" style={{ margin: 8 }}>
-          <View style={{ margin: 32 }}>
+        <Page
+          size="A4"
+          style={{ marginVertical: 32, marginLeft: 32, paddingRight: 64 }}
+        >
+          <View>
             <Text style={{ textAlign: "center" }}>
               Bukti Lulus Selekti Masuk SDN 42 Kambang Harapan
             </Text>
+
             <View
               style={{
                 display: "flex",
@@ -66,6 +66,14 @@ export default function Pdf() {
               Dengan ini menyatakan bahwa Febriqgal purnama telah lulus melewati
               segala seleksi tes yang telah di laksanakan dengan baik.
             </Text>
+            <View style={{ marginTop: 60 }}>
+              <Text
+                style={{ textAlign: "right", fontSize: 10 }}
+              >{`Padang, ${dayjs().format("DD/MM/YYYY")}`}</Text>
+              <Text style={{ textAlign: "right", fontSize: 10, marginTop: 30 }}>
+                Kepala Sekolah
+              </Text>
+            </View>
           </View>
         </Page>
       </Document>

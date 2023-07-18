@@ -1,16 +1,21 @@
 import { Button, Input } from "@nextui-org/react";
 import Head from "next/head";
 import React from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import SignUp from "@/components/SignUp";
 import ForgetPassword from "@/components/ForgetPassword";
 export default function Login() {
   const route = useRouter();
+  const auth = getAuth();
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
+  const onSubmit = async (data) => {
+    await signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
         route.replace("/");
@@ -21,7 +26,6 @@ export default function Login() {
         alert(errorMessage);
       });
   };
-  const auth = getAuth();
 
   return (
     <>

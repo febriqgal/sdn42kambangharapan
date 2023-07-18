@@ -1,4 +1,3 @@
-import Layout from "@/components/layout";
 import protectLogin from "@/protect/protect-login";
 import { db } from "@/server/db";
 import app from "@/server/db";
@@ -7,15 +6,19 @@ import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getAuth } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc,setDoc, collection, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import Head from "next/head";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { Toaster, toast } from "react-hot-toast";
-
+import layoutUser from "@/components/layout/layout-user";
+import LayoutUser from "@/components/layout/layout-user";
+import { useUser } from "@/context/user";
 const Pendaftaran = () => {
+  const uidUser = useUser().uid
+   
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { register, handleSubmit, control, reset } = useForm();
@@ -29,7 +32,7 @@ const Pendaftaran = () => {
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
       await uploadBytes(storageRef, imageUpload2);
-      await addDoc(collection(db, "pendaftaran"), {
+      await setDoc(doc(db, "pendaftaran",uidUser), {
         uid: user.uid,
         nmlengkap: data.namalengkap,
         tempatlahir: data.tempatlahir,
@@ -57,12 +60,12 @@ const Pendaftaran = () => {
   };
 
   return (
-    <Layout>
+    <LayoutUser>
       <Toaster />
       <Head>
         <title>Pendaftaran - SDN 42 Kambang Harapan</title>
       </Head>
-      <div className="flex items-center justify-center min-h-screen py-5">
+      
         <form
           onSubmit={handleSubmit(addDatafromDBFirestore)}
           className="grid w-full grid-cols-1 gap-4 px-5 sm:grid-cols-2 sm:max-w-2xl"
@@ -296,8 +299,8 @@ const Pendaftaran = () => {
             Kirim
           </Button>
         </form>
-      </div>
-    </Layout>
+     
+    </LayoutUser>
   );
 };
 export default protectLogin(Pendaftaran);

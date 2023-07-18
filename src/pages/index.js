@@ -19,7 +19,7 @@ export default function Home() {
         <title>SDN 42 Kambang Harapan</title>
         <link rel="icon" href="/logo.png" />
       </Head>
-      <div className=""></div>
+      <div className="flex items-center justify-center min-h-screen">Home</div>
     </Layout>
   );
 }

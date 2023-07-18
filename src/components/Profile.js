@@ -49,7 +49,16 @@ export default function ProfileC() {
               </h1>
               <Menu.Item>
                 {user?.email != "admin@gmail.com" ? (
-                  <></>
+                  <Button
+                    onPress={() => {
+                      route.push("/user");
+                    }}
+                    flat
+                    className="text-black"
+                    size={"sm"}
+                  >
+                    Dashboard User
+                  </Button>
                 ) : (
                   <Button
                     onPress={() => {
