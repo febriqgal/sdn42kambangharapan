@@ -1,7 +1,17 @@
-import Image from "next/image";
-import Head from "next/head";
 import Layout from "@/components/layout";
+import { StyleSheet } from "@react-pdf/renderer";
+import Head from "next/head";
 
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: "row",
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+});
 export default function Home() {
   return (
     <Layout>
@@ -9,9 +19,7 @@ export default function Home() {
         <title>SDN 42 Kambang Harapan</title>
         <link rel="icon" href="/logo.png" />
       </Head>
-      <div className="flex items-center justify-center min-h-screen">
-        <h1>Home</h1>
-      </div>
+      <div className=""></div>
     </Layout>
   );
 }
