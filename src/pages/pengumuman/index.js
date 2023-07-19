@@ -42,9 +42,11 @@ export default function LayouUser() {
 
   if (isLoading) {
     return (
-      <div className={styles.main}>
-        <Loading color={"currentColor"} />
-      </div>
+      <Layout>
+        <div className={"flex justify-center items-start min-h-screen"}>
+          <Loading color={"currentColor"} />
+        </div>
+      </Layout>
     );
   } else {
     const post = snapshot.current;

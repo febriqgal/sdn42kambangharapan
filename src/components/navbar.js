@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import ProfileC from "./Profile";
 import LogoSD from "./icon/logo";
+import Image from "next/image";
 export default function NavbarC() {
   const user = getAuth().currentUser;
   const auth = getAuth();
@@ -15,63 +16,29 @@ export default function NavbarC() {
   ];
 
   return (
-    <Navbar>
-      <Navbar.Brand>
-        <Navbar.Toggle
-          aria-label="toggle navigation"
-          className="mr-4 sm:hidden"
-        />
-        <LogoSD className={"h-10 mr-2"} />
-
-        <Text b color="inherit">
-          SDN 42 Kambang Harapan
-        </Text>
-      </Navbar.Brand>
-      <Navbar.Content className="hidden sm:flex">
+    <nav className="fixed top-0 z-50 flex items-center justify-between w-full px-20 bg-white">
+      <div className="flex items-center justify-center">
+        <LogoSD className={"h-11 mr-2"} />
+        <h1 className="font-bold">SDN 42 Kambang Harapan</h1>
+      </div>
+      <div className="flex items-center gap-3 py-4">
         {navigation.map((e, i) => {
           return (
             <Link
-              key={i}
               className={
                 route.pathname != e.href
-                  ? "hover:text-white hover:bg-[#172554] pt-2 pb-3 px-4 rounded-lg transition-all duration-500"
-                  : "font-bold text-white pt-2 pb-3 px-4 rounded-lg bg-[#172554] "
+                  ? ""
+                  : "font-bold underline underline-offset-8"
               }
               href={e.href}
+              key={i}
             >
               {e.title}
             </Link>
           );
         })}
         <ProfileC />
-      </Navbar.Content>
-
-      <Navbar.Collapse>
-        {navigation.map((item, index) => (
-          <Navbar.CollapseItem key={index}>
-            <Link href={item.href}>{item.title}</Link>
-          </Navbar.CollapseItem>
-        ))}
-        {user ? (
-          <button
-            className="text-lg text-red-500"
-            onClick={async () => {
-              await signOut(auth);
-            }}
-          >
-            Keluar
-          </button>
-        ) : (
-          <button
-            className="text-lg"
-            onClick={() => {
-              route.push("/login");
-            }}
-          >
-            Login
-          </button>
-        )}
-      </Navbar.Collapse>
-    </Navbar>
+      </div>
+    </nav>
   );
 }

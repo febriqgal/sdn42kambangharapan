@@ -44,9 +44,9 @@ export default function HasilSeleksi() {
     return (
       <LayoutAdmin>
         <Head>
-          <title>Hasil Seleksi - SDN 42 Kambang Harapan</title>
+          <title>Kelola Pendaftaran - SDN 42 Kambang Harapan</title>
         </Head>
-        <div className="w-full min-h-screen mx-5 mb-5 ">
+        <div className="w-full px-5">
           <table className="w-full text-sm bg-white divide-y-2 divide-gray-200 ">
             <thead className="ltr:text-left rtl:text-right">
               <tr>

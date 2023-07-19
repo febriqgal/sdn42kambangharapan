@@ -9,26 +9,40 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import SignUp from "@/components/SignUp";
+import { toast, Toaster } from "react-hot-toast";
 import ForgetPassword from "@/components/ForgetPassword";
 export default function Login() {
   const route = useRouter();
   const auth = getAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
-    await signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    const push = async () => {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setTimeout(() => {
         route.replace("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-      });
+      }, 2000);
+    };
+    toast.promise(push(), {
+      loading: "Mohon tunggu...",
+      success: <b>Berhasil login</b>,
+      error: (error) => {
+        if (error.code === "auth/wrong-password") {
+          toast.error("Password Salah!");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("Email tidak terdaftar!");
+        } else {
+          toast.error(
+            "Tidak bisa login! karena banyak upaya login yang gagal, cobalah beberapa saat lagi!"
+          );
+        }
+      },
+    });
+    reset();
   };
 
   return (
     <>
+      <Toaster />
       <Head>
         <title>Login - SDN 42 Kambang Harapan</title>
         <link rel="icon" href="/logo.png" />

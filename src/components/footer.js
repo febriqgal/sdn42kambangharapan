@@ -75,8 +75,8 @@ const navigation = {
 
 export default function FooterC() {
   return (
-    <footer className="bg-[#172554]">
-      <div className="flex flex-col-reverse items-center justify-between px-5 py-10 sm:flex-row">
+    <footer className="bg-primary">
+      <div className="flex flex-col-reverse items-center justify-between px-20 py-10 sm:flex-row">
         <div className="flex flex-col items-center mt-10 sm:items-start sm:mt-0">
           <h1 className="text-gray-400 hover:text-gray-500">
             SDN 42 Kambang Harapan, Kambang, Pesisir Selatan.

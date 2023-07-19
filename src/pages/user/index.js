@@ -1,32 +1,18 @@
-import Layout from "@/components/layout";
-import Head from "next/head";
-import { Loading, Tooltip } from "@nextui-org/react";
+import { Loading } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {
-  collection,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
-import layoutUser from "@/components/layout/layout-user";
-import Image from "next/image";
+import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-
-import dibuat from "../../../public/dibuat.svg";
-import penulis from "../../../public/penulis.svg";
-import { db } from "@/server/db";
-import styles from "../../styles/Home.module.css";
 import LayoutUser from "@/components/layout/layout-user";
-import { getAuth } from "firebase/auth";
 import { useUser } from "@/context/user";
+import { db } from "@/server/db";
+import { getAuth } from "firebase/auth";
+import styles from "../../styles/Home.module.css";
 export default function User() {
   const uidUser = useUser().uid;
+
   const userr = getAuth().currentUser;
   const route = useRouter();
   dayjs.locale("id");
@@ -56,7 +42,9 @@ export default function User() {
   } else if (snapshot.current == null) {
     return (
       <LayoutUser>
-        <h1>belum daftar</h1>
+        <div>
+          <h1 className="text-xl">{`Hallo,👋 ${userr.displayName}, Selamat Datang di Dashboard User SDN 42 Kambang Harapan`}</h1>
+        </div>
       </LayoutUser>
     );
   }

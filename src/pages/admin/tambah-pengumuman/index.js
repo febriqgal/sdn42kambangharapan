@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
-
+import Head from "next/head";
 export default function TambahPengumuman() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
@@ -46,9 +46,12 @@ export default function TambahPengumuman() {
   };
   return (
     <LayoutAdmin>
+      <Head>
+        <title>Tambah Pengumuman - SDN 42 Kambang Harapan</title>
+      </Head>
       <Toaster />
       <form
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-2 mt-10"
         onSubmit={handleSubmit(addDatafromDBFirestore)}
       >
         <Input

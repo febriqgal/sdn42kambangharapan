@@ -1,14 +1,12 @@
 import LayoutUser from "@/components/layout/layout-user";
-import { Button, Loading } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import "dayjs/locale/id";
 import { getAuth, updatePassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Toaster, toast } from "react-hot-toast";
 
-import { db } from "@/server/db";
+import { Toaster, toast } from "react-hot-toast";
 export default function Index() {
   const route = useRouter();
   const user = getAuth().currentUser;
@@ -29,6 +27,10 @@ export default function Index() {
 
   return (
     <LayoutUser>
+      <Head>
+        <title>Kelola Akun - SDN 42 Kambang Harapan</title>
+      </Head>
+
       <Toaster />
 
       <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>

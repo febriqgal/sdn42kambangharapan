@@ -10,10 +10,10 @@ export default function ProfileC() {
   const auth = getAuth();
   const user = getAuth().currentUser;
   return (
-    <div className="">
+    <div>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className={"bg-gray-200 rounded-full p-1"}>
+          <Menu.Button className={"bg-gray-200 ml-4 rounded-full p-1"}>
             <svg
               width="24"
               height="24"
