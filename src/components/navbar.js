@@ -12,11 +12,10 @@ export default function NavbarC() {
     { title: "Beranda", href: "/" },
     { title: "Pengumuman", href: "/pengumuman" },
     { title: "Hasil Seleksi", href: "/hasil-seleksi" },
-    
   ];
 
   return (
-    <Navbar variant="sticky">
+    <Navbar>
       <Navbar.Brand>
         <Navbar.Toggle
           aria-label="toggle navigation"
@@ -33,7 +32,11 @@ export default function NavbarC() {
           return (
             <Link
               key={i}
-              className={route.pathname != e.href ? "" : "font-bold"}
+              className={
+                route.pathname != e.href
+                  ? "hover:text-white hover:bg-[#172554] pt-2 pb-3 px-4 rounded-lg transition-all duration-500"
+                  : "font-bold text-white pt-2 pb-3 px-4 rounded-lg bg-[#172554] "
+              }
               href={e.href}
             >
               {e.title}

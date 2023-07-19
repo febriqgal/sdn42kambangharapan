@@ -48,29 +48,36 @@ export default function ProfileC() {
                 {user?.displayName ?? ""}
               </h1>
               <Menu.Item>
-                {user?.email != "admin@gmail.com" ? (
-                  <Button
-                    onPress={() => {
-                      route.push("/user");
-                    }}
-                    flat
-                    className="text-black"
-                    size={"sm"}
-                  >
-                    Dashboard User
-                  </Button>
-                ) : (
-                  <Button
-                    onPress={() => {
-                      route.push("/admin");
-                    }}
-                    flat
-                    className="text-black"
-                    size={"sm"}
-                  >
-                    Dashboard Admin
-                  </Button>
-                )}
+                <>
+                  {user?.email != "admin@gmail.com" ? (
+                    <></>
+                  ) : (
+                    <Button
+                      onPress={() => {
+                        route.push("/admin");
+                      }}
+                      flat
+                      className="text-black"
+                      size={"sm"}
+                    >
+                      Dashboard Admin
+                    </Button>
+                  )}
+                  {!user || user.email == "admin@gmail.com" ? (
+                    <></>
+                  ) : (
+                    <Button
+                      onPress={() => {
+                        route.push("/user");
+                      }}
+                      flat
+                      className="text-black"
+                      size={"sm"}
+                    >
+                      Dashboard User
+                    </Button>
+                  )}
+                </>
               </Menu.Item>
               <Menu.Item>
                 {user ? (

@@ -8,7 +8,10 @@ const LayoutUser = ({ children }) => {
     <div className="flex">
       <div className="flex flex-col justify-between w-16 h-screen bg-white border-e">
         <div>
-          <Link href={'/user'} className="inline-flex items-center justify-center w-16 h-16">
+          <Link
+            href={"/user"}
+            className="inline-flex items-center justify-center w-16 h-16"
+          >
             <span className="grid w-10 h-10 text-xs text-gray-600 bg-gray-100 rounded-lg place-content-center">
               U
             </span>

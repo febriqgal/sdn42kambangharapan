@@ -6,19 +6,22 @@ import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getAuth } from "firebase/auth";
-import { addDoc,setDoc, collection, doc } from "firebase/firestore";
+import { addDoc, setDoc, getDoc, collection, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { Toaster, toast } from "react-hot-toast";
 import layoutUser from "@/components/layout/layout-user";
 import LayoutUser from "@/components/layout/layout-user";
 import { useUser } from "@/context/user";
+import Loading from "@nextui-org/react";
+import { useEffect } from "react";
 const Pendaftaran = () => {
-  const uidUser = useUser().uid
-   
+  const uidUser = useUser().uid;
+  const snapshot = useRef(null);
+  const [isLoading, setIsloading] = useState(true);
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { register, handleSubmit, control, reset } = useForm();
@@ -32,7 +35,7 @@ const Pendaftaran = () => {
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
       await uploadBytes(storageRef, imageUpload2);
-      await setDoc(doc(db, "pendaftaran",uidUser), {
+      await setDoc(doc(db, "pendaftaran", uidUser), {
         uid: user.uid,
         nmlengkap: data.namalengkap,
         tempatlahir: data.tempatlahir,
@@ -58,14 +61,27 @@ const Pendaftaran = () => {
       error: <b>Error</b>,
     });
   };
+  const getDBFromFirestore = async () => {
+    const docRef = doc(db, "pendaftaran", uidUser);
+    const docSnap = await getDoc(docRef);
+    snapshot.current = docSnap.data();
 
-  return (
-    <LayoutUser>
-      <Toaster />
-      <Head>
-        <title>Pendaftaran - SDN 42 Kambang Harapan</title>
-      </Head>
-      
+    setTimeout(() => {
+      setIsloading(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    getDBFromFirestore();
+  });
+  if (snapshot.current?.uid != uidUser || snapshot.current == null) {
+    return (
+      <LayoutUser>
+        <Toaster />
+        <Head>
+          <title>Pendaftaran - SDN 42 Kambang Harapan</title>
+        </Head>
+
         <form
           onSubmit={handleSubmit(addDatafromDBFirestore)}
           className="grid w-full grid-cols-1 gap-4 px-5 sm:grid-cols-2 sm:max-w-2xl"
@@ -299,8 +315,14 @@ const Pendaftaran = () => {
             Kirim
           </Button>
         </form>
-     
-    </LayoutUser>
-  );
+      </LayoutUser>
+    );
+  } else {
+    return (
+      <LayoutUser>
+        <h1>Anda Sudah Mendaftar!!!</h1>
+      </LayoutUser>
+    );
+  }
 };
 export default protectLogin(Pendaftaran);

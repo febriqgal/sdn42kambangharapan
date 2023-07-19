@@ -1,13 +1,17 @@
 import LayoutUser from "@/components/layout/layout-user";
-import { Button, Input } from "@nextui-org/react";
-import React from "react";
-import { getAuth } from "firebase/auth";
-import { updatePassword, updateProfile } from "firebase/auth";
+import { Button, Loading } from "@nextui-org/react";
+import "dayjs/locale/id";
+import { getAuth, updatePassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
-import { useRouter } from "next/router";
+
+import { db } from "@/server/db";
 export default function Index() {
   const route = useRouter();
+  const user = getAuth().currentUser;
   const auth = getAuth();
   const userr = auth.currentUser;
   const { register, handleSubmit } = useForm();
@@ -20,13 +24,13 @@ export default function Index() {
       success: <b>Berhasil Edit Akun</b>,
       error: <b>Error</b>,
     });
-    route.replace('/login')
+    route.replace("/login");
   };
-  const user = getAuth().currentUser;
+
   return (
     <LayoutUser>
       <Toaster />
-       
+
       <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
         <label
           htmlFor="namalengkap"
@@ -76,7 +80,6 @@ export default function Index() {
           Kirim
         </Button>
       </form>
-        
     </LayoutUser>
   );
 }

@@ -37,12 +37,7 @@ export default function User() {
     const docRef = doc(db, "pendaftaran", uidUser);
     const docSnap = await getDoc(docRef);
     snapshot.current = docSnap.data();
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data().ket);
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
-    }
+
     setTimeout(() => {
       setIsloading(false);
     }, 1000);
@@ -74,7 +69,7 @@ export default function User() {
             <a
               className="text-blue-700 underline"
               target="_blank"
-              href="/user/pdf"
+              href={`/user/${snapshot.current.uid}`}
             >
               Disini
             </a>

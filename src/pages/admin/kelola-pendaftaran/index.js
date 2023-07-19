@@ -12,6 +12,7 @@ import { Fragment } from "react";
 import LayoutAdmin from "@/components/layout/layout-admin";
 import { db } from "@/server/db";
 import styles from "../../../styles/Home.module.css";
+import Link from "next/link";
 export default function HasilSeleksi() {
   const route = useRouter();
   dayjs.locale("id");
@@ -75,6 +76,9 @@ export default function HasilSeleksi() {
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Nama Ibu
+                </th>{" "}
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  File
                 </th>
                 <th className="px-4 py-2 font-medium text-center text-gray-900">
                   Keterangan
@@ -113,6 +117,14 @@ export default function HasilSeleksi() {
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.nmibu}
+                    </td>
+                    <td className="px-4 py-2 text-gray-700 text-start">
+                      <a
+                        target="_blank"
+                        href={`https://firebasestorage.googleapis.com/v0/b/sdn42-kambang-harapan.appspot.com/o/image%2Fpendaftaran%2F${Data.pdf}?alt=media&token=deb93397-742b-4d57-8a5c-a6b00a643ab2`}
+                      >
+                        Link
+                      </a>
                     </td>
                     <div>
                       <Menu as="div">
