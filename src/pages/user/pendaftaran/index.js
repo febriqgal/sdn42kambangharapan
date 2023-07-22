@@ -6,7 +6,14 @@ import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getAuth } from "firebase/auth";
-import { addDoc, setDoc, getDoc, collection, doc } from "firebase/firestore";
+import {
+  addDoc,
+  setDoc,
+  getDoc,
+  collection,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import Head from "next/head";
 import { useState, useRef } from "react";
@@ -18,7 +25,10 @@ import LayoutUser from "@/components/layout/layout-user";
 import { useUser } from "@/context/user";
 import Loading from "@nextui-org/react";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+
 const Pendaftaran = () => {
+  const route = useRouter();
   const uidUser = useUser().uid;
   const snapshot = useRef(null);
   const [isLoading, setIsloading] = useState(true);
@@ -33,13 +43,17 @@ const Pendaftaran = () => {
   const storageRef = ref(storage, `image/pendaftaran/${uid}`);
 
   const addDatafromDBFirestore = async (data) => {
-    const push = async () => {
+    if (data.umur < 7) {
+      toast.error("Umur Minimal 7 Tahun Keatas");
+    } else {
+      setIsloading(true);
       await uploadBytes(storageRef, imageUpload2);
       await setDoc(doc(db, "pendaftaran", uidUser), {
         uid: user.uid,
         nmlengkap: data.namalengkap,
         tempatlahir: data.tempatlahir,
         tgllahir: data.tanggallahir,
+        umur: data.umur,
         jeniskelamin: data.jeniskelamin,
         agama: data.agama,
         alamat: data.alamat,
@@ -51,15 +65,22 @@ const Pendaftaran = () => {
         agamaibu: data.agamaibu,
         pekerjaanibu: data.pekerjaanibu,
         nohp: data.nohp,
+        prestasi: data.prestasi,
         pdf: storageRef.name,
         ket: "-",
       });
-    };
-    toast.promise(push(), {
-      loading: "Mohon tunggu...",
-      success: <b>Berhasil menambahkan pendaftaran</b>,
-      error: <b>Error</b>,
-    });
+      if (data.ket != "-") {
+        const washingtonRef = doc(db, "pendaftaran", uidUser);
+        await updateDoc(washingtonRef, {
+          ket: "Diterima",
+        });
+      }
+
+      toast.success("Berhasil Melakukan Pendaftaran");
+      setTimeout(() => {
+        route.replace("/");
+      }, 2000);
+    }
   };
   const getDBFromFirestore = async () => {
     const docRef = doc(db, "pendaftaran", uidUser);
@@ -74,6 +95,13 @@ const Pendaftaran = () => {
   useEffect(() => {
     getDBFromFirestore();
   });
+  if (isLoading) {
+    <LayoutUser>
+      <div>
+        <Loading />
+      </div>
+    </LayoutUser>;
+  }
   if (snapshot.current?.uid != uidUser || snapshot.current == null) {
     return (
       <LayoutUser>
@@ -130,6 +158,19 @@ const Pendaftaran = () => {
               id="tanggallahir"
               className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
               {...register("tanggallahir", { required: false })}
+            />
+          </label>
+          <label
+            htmlFor="umur"
+            className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+          >
+            <span className="text-xs font-medium text-gray-700">Umur</span>
+
+            <input
+              type="number"
+              id="umur"
+              className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+              {...register("umur", { required: false })}
             />
           </label>
           <label
@@ -295,12 +336,50 @@ const Pendaftaran = () => {
               {...register("nohp", { required: false })}
             />
           </label>
+          <label
+            htmlFor="prestasi"
+            className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+          >
+            <div>
+              <h1 className="text-xs font-medium text-gray-700">Prestasi</h1>
+              <h1 className="text-[10px] font-medium text-red-500">
+                *Kosongkan jika tidak ada
+              </h1>
+            </div>
+
+            <input
+              type="text"
+              id="prestasi"
+              className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+              {...register("prestasi", { required: false })}
+            />
+          </label>
+          <label
+            htmlFor="jarak"
+            className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+          >
+            <div>
+              <h1 className="text-xs font-medium text-gray-700">
+                Perkiraan Jarak Rumah
+              </h1>
+              <h1 className="text-[10px] font-medium text-red-500">
+                *Satuan KM,
+              </h1>
+            </div>
+
+            <input
+              type="number"
+              id="jarak"
+              className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+              {...register("jarak", { required: false })}
+            />
+          </label>
 
           <label
             htmlFor="gambarkk"
             className="block px-3 py-2 overflow-hidden border border-gray-200 rounded-md shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
           >
-            <span className="text-xs font-medium text-gray-700">{`Upload KK & Akta (Jadikan dalam 1 file PDF)`}</span>
+            <span className="text-xs font-medium text-gray-700">{`Upload KK, Akta & Sertifikat  (Jadikan dalam 1 file PDF)`}</span>
 
             <input
               type="file"
@@ -312,7 +391,7 @@ const Pendaftaran = () => {
             />
           </label>
           <Button type="submit" className="bg-[#172554] sm:mt-7">
-            Kirim
+            {isLoading ? "Loading" : "Kirim"}
           </Button>
         </form>
       </LayoutUser>
