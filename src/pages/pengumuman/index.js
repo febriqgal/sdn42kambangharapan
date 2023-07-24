@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import { Loading, Tooltip } from "@nextui-org/react";
+import { Loading, Spinner, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -44,7 +44,7 @@ export default function LayouUser() {
     return (
       <Layout>
         <div className={"flex justify-center items-start min-h-screen"}>
-          <Loading color={"currentColor"} />
+          <Spinner color={"currentColor"} />
         </div>
       </Layout>
     );

@@ -78,7 +78,7 @@ export default function Index() {
             {...register("password", { required: true })}
           />
         </label>
-        <Button type="submit" className="bg-[#172554]">
+        <Button type="submit" color="primary">
           Kirim
         </Button>
       </form>

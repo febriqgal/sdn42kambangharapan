@@ -1,31 +1,21 @@
+import LayoutUser from "@/components/layout/layout-user";
+import { useUser } from "@/context/user";
 import protectLogin from "@/protect/protect-login";
-import { db } from "@/server/db";
-import app from "@/server/db";
-import { Button } from "@nextui-org/react";
+import app, { db } from "@/server/db";
+import { Button, Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getAuth } from "firebase/auth";
-import {
-  addDoc,
-  setDoc,
-  getDoc,
-  collection,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import Head from "next/head";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
 import { Toaster, toast } from "react-hot-toast";
-import layoutUser from "@/components/layout/layout-user";
-import LayoutUser from "@/components/layout/layout-user";
-import { useUser } from "@/context/user";
-import Loading from "@nextui-org/react";
-import { useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Pendaftaran = () => {
   const route = useRouter();
@@ -98,7 +88,7 @@ const Pendaftaran = () => {
   if (isLoading) {
     <LayoutUser>
       <div>
-        <Loading />
+        <Spinner color="primary" />
       </div>
     </LayoutUser>;
   }
@@ -390,7 +380,7 @@ const Pendaftaran = () => {
               }}
             />
           </label>
-          <Button type="submit" className="bg-[#172554] sm:mt-7">
+          <Button type="submit" color="primary" className="sm:mt-7">
             {isLoading ? "Loading" : "Kirim"}
           </Button>
         </form>

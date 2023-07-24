@@ -1,6 +1,6 @@
 import Layout from "@/components/layout";
 import Head from "next/head";
-import { Loading, Tooltip } from "@nextui-org/react";
+import { Chip, Loading, Spinner, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -12,6 +12,16 @@ import {
   query,
   updateDoc,
 } from "firebase/firestore";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  RadioGroup,
+  Radio,
+} from "@nextui-org/react";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -22,6 +32,16 @@ import penulis from "../../../public/penulis.svg";
 import { db } from "@/server/db";
 import styles from "../../styles/Home.module.css";
 export default function HasilSeleksi() {
+  const colors = [
+    "default",
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+  ];
+  const [selectedColor, setSelectedColor] = useState("primary");
+
   const route = useRouter();
   dayjs.locale("id");
   dayjs.extend(relativeTime);
@@ -44,7 +64,7 @@ export default function HasilSeleksi() {
     return (
       <Layout>
         <div className={`flex justify-center items-start min-h-screen`}>
-          <Loading color={"currentColor"} />
+          <Spinner color={"currentColor"} />
         </div>
       </Layout>
     );
@@ -56,41 +76,38 @@ export default function HasilSeleksi() {
         <Head>
           <title>Hasil Seleksi - SDN 42 Kambang Harapan</title>
         </Head>
-        <div className="min-h-screen mx-5 mb-5 ">
-          <table className="w-full text-sm bg-white divide-y-2 divide-gray-200 ">
-            <thead className="ltr:text-left rtl:text-right">
-              <tr>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Nama
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Alamat
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Keterangan
-                </th>
-              </tr>
-            </thead>
-
-            <tbody className="divide-y divide-gray-200">
+        <div className="flex flex-col min-h-screen gap-3">
+          <Table
+            color={selectedColor}
+            selectionMode="single"
+            defaultSelectedKeys={["2"]}
+            aria-label="Example static collection table"
+          >
+            <TableHeader>
+              <TableColumn>Nama Lengkap</TableColumn>
+              <TableColumn>Alamat</TableColumn>
+              <TableColumn>Keterangan</TableColumn>
+            </TableHeader>
+            <TableBody>
               {data.map((e, i) => {
                 const Data = e.data();
                 return (
-                  <tr key={i}>
-                    <td className="px-4 py-2 font-medium text-gray-900 text-start">
-                      {Data.nmlengkap}
-                    </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.alamat}
-                    </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.ket ?? "-"}
-                    </td>
-                  </tr>
+                  <TableRow key={i}>
+                    <TableCell>{Data.nmlengkap}</TableCell>
+                    <TableCell>{Data.alamat}</TableCell>
+                    <TableCell>
+                      <Chip
+                        color={Data.ket === "Diterima" ? "success" : "danger"}
+                        className="text-white"
+                      >
+                        {Data.ket ?? "-"}
+                      </Chip>
+                    </TableCell>
+                  </TableRow>
                 );
               })}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </Layout>
     );

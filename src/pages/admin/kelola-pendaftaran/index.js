@@ -1,4 +1,4 @@
-import { Loading } from "@nextui-org/react";
+import { Chip, Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -35,7 +35,7 @@ export default function HasilSeleksi() {
   if (isLoading) {
     return (
       <div className={styles.main}>
-        <Loading color={"currentColor"} />
+        <Spinner color={"currentColor"} />
       </div>
     );
   } else {
@@ -129,8 +129,15 @@ export default function HasilSeleksi() {
                     <div>
                       <Menu as="div">
                         <div>
-                          <Menu.Button className="items-center justify-center w-full px-2 py-2 my-1 text-sm font-medium text-white bg-green-700 rounded-md hover:bg-opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                            {Data.ket != "-" ? Data.ket : "Pilih"}
+                          <Menu.Button className="flex m-auto mt-1">
+                            <Chip
+                              className="text-white"
+                              color={
+                                Data.ket === "Diterima" ? "success" : "danger"
+                              }
+                            >
+                              {Data.ket != "-" ? Data.ket : "Pilih"}
+                            </Chip>
                           </Menu.Button>
                         </div>
                         <Transition
@@ -143,42 +150,46 @@ export default function HasilSeleksi() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute px-5 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg w-44 right-10 ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="flex flex-col px-1 py-1 my-4">
-                              <button
-                                onClick={async () => {
-                                  const washingtonRef = doc(
-                                    db,
-                                    "pendaftaran",
-                                    e.id
-                                  );
+                            {Data.ket != "Diterima" ? (
+                              <div className="flex flex-col px-1 py-1 my-4">
+                                <button
+                                  onClick={async () => {
+                                    const washingtonRef = doc(
+                                      db,
+                                      "pendaftaran",
+                                      e.id
+                                    );
 
-                                  await updateDoc(washingtonRef, {
-                                    ket: "Diterima",
-                                  });
-                                  route.refresh();
-                                }}
-                                className="py-2 text-center rounded-lg hover:bg-black hover:text-white"
-                              >
-                                Diterima
-                              </button>
-                              <button
-                                onClick={async () => {
-                                  const washingtonRef = doc(
-                                    db,
-                                    "pendaftaran",
-                                    e.id
-                                  );
+                                    await updateDoc(washingtonRef, {
+                                      ket: "Diterima",
+                                    });
+                                    route.refresh();
+                                  }}
+                                  className="py-2 text-center rounded-lg hover:bg-black hover:text-white"
+                                >
+                                  Diterima
+                                </button>
+                                <button
+                                  onClick={async () => {
+                                    const washingtonRef = doc(
+                                      db,
+                                      "pendaftaran",
+                                      e.id
+                                    );
 
-                                  await updateDoc(washingtonRef, {
-                                    ket: "Tidak Diterima",
-                                  });
-                                  route.refresh();
-                                }}
-                                className="py-2 text-center rounded-lg hover:bg-black hover:text-white"
-                              >
-                                Tidak Diterima
-                              </button>
-                            </div>
+                                    await updateDoc(washingtonRef, {
+                                      ket: "Tidak Diterima",
+                                    });
+                                    route.refresh();
+                                  }}
+                                  className="py-2 text-center rounded-lg hover:bg-black hover:text-white"
+                                >
+                                  Tidak Diterima
+                                </button>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
                           </Menu.Items>
                         </Transition>
                       </Menu>

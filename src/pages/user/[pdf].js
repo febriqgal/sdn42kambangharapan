@@ -1,5 +1,5 @@
 import { db } from "@/server/db";
-import { Loading } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 import { Document, PDFViewer, Page, Text, View } from "@react-pdf/renderer";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
@@ -37,7 +37,7 @@ export default function Pdf() {
   if (isLoading) {
     return (
       <div className={styles.main}>
-        <Loading color={"currentColor"} />
+        <Spinner color={"currentColor"} />
       </div>
     );
   } else {

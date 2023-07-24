@@ -1,4 +1,4 @@
-import { Loading } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -36,7 +36,7 @@ export default function User() {
   if (isLoading) {
     return (
       <div className={styles.main}>
-        <Loading color={"currentColor"} />
+        <Spinner color={"currentColor"} />
       </div>
     );
   } else if (snapshot.current == null) {

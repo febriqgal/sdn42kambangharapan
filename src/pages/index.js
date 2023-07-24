@@ -1,9 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
+import { Button } from "@nextui-org/react";
 import Head from "next/head";
 import Link from "next/link";
-
+import { useUser } from "@/context/user";
+import { useRouter } from "next/router";
 export default function Home() {
+  const route = useRouter();
+  const user = useUser().uid;
+  console.log(user);
   return (
     <Layout>
       <Head>
@@ -22,19 +27,22 @@ export default function Home() {
               SDN 42 Kambang Harapan
             </h1>
             <div className="flex items-center justify-center gap-4 mt-5">
-              <Link
-                href="/login"
-                className="block w-full px-12 py-3 text-sm font-medium text-white rounded shadow bg-primary focus:outline-none focus:ring sm:w-auto"
-              >
-                Login
-              </Link>
+              {user ? (
+                <></>
+              ) : (
+                <Button variant="bordered" color="primary">
+                  Login
+                </Button>
+              )}
 
-              <Link
-                href="/pengumuman"
-                className="block w-full px-12 py-3 text-sm font-medium bg-white rounded shadow text-primary hover:text-primary focus:outline-none focus:ring sm:w-auto"
+              <Button
+                onPress={() => {
+                  route.push("/pengumuman");
+                }}
+                color="primary"
               >
                 Pengumuman
-              </Link>
+              </Button>
             </div>
           </div>
         </div>

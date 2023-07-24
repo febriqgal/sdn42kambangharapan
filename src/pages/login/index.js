@@ -48,7 +48,7 @@ export default function Login() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <div className="flex items-center justify-center min-h-screen">
-        <div className="max-w-sm p-10 border shadow-2xl rounded-2xl">
+        <div className="w-[300px] p-10 border shadow-2xl rounded-2xl">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-2"
@@ -59,7 +59,7 @@ export default function Login() {
               placeholder="Masukkan email"
               {...register("email")}
             />
-            <Input.Password
+            <Input
               type="password"
               label="Password"
               placeholder="Masukkan password"
@@ -68,7 +68,7 @@ export default function Login() {
             <ForgetPassword />
 
             <SignUp />
-            <Button type="submit" color={"primary"} className="bg-[#172554]">
+            <Button type="submit" color={"primary"}>
               Masuk
             </Button>
           </form>

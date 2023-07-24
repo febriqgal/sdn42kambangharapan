@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Loading } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -50,7 +50,7 @@ export default function detail() {
   if (isLoading) {
     return (
       <div className={styles.main}>
-        <Loading color={"currentColor"} />
+        <Spinner color={"currentColor"} />
       </div>
     );
   } else {

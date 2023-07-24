@@ -61,7 +61,7 @@ export default function TambahPengumuman() {
           {...register("judul", { required: true })}
         />
 
-        <Input
+        <input
           label="Pilih Gambar"
           type="file"
           {...register("gambar")}

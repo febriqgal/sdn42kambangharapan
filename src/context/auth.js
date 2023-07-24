@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Loading } from "@nextui-org/react";
+
 import { useEffect, useState } from "react";
 import { Authentication } from "@/server/db";
 import styles from "../styles/Home.module.css";
 import { InitialUserState, useUser } from "./user";
+import { Spinner } from "@nextui-org/react";
 
 const AuthStateChangeProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +36,7 @@ const AuthStateChangeProvider = ({ children }) => {
   if (isLoading) {
     return (
       <div className={styles.main}>
-        <Loading color={"currentColor"} />
+        <Spinner color="primary"></Spinner>
       </div>
     );
   }
