@@ -74,18 +74,8 @@ export default function SyaratPendafataran() {
                     Bebereapa Syarat pendaftaran:
                   </h1>
                   <li>Umur Minimal 7 Tahun</li>
-                  <li>
-                    Now this is a story all about how, my life got
-                    flipped-turned upside down
-                  </li>
-                  <li>
-                    Now this is a story all about how, my life got
-                    flipped-turned upside down
-                  </li>
-                  <li>
-                    Now this is a story all about how, my life got
-                    flipped-turned upside down
-                  </li>
+                  <li>Jarak rumah dari sekolah maksimal 2 KM</li>
+                  <li>{`Hafalan 1 juz Alquran (Jalur Prestasi)`}</li>
                 </ul>
               </div>
             </div>

@@ -46,7 +46,7 @@ const LayoutUser = ({ children }) => {
           })}
         </nav>
       </nav>
-      <main className="flex items-center justify-center my-20">{children}</main>
+      <main className="flex items-center justify-center my-10">{children}</main>
     </div>
   );
 };

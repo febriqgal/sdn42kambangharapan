@@ -26,13 +26,10 @@ export default function ModalHapus({ data }) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1"></ModalHeader>
-              <ModalBody>{`Yakin Hapus ${data.judul}`}</ModalBody>
+              <ModalBody className="text-center">{`Yakin Hapus?`}</ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onClick={onClose}>
-                  Close
-                </Button>
                 <Button
-                  color="primary"
+                  color="danger"
                   onPress={async () => {
                     const docRef = doc(db, "pengumuman", `${id}`);
                     const storage = getStorage(app);
@@ -47,7 +44,9 @@ export default function ModalHapus({ data }) {
                       window.location.reload();
                     }, 3000);
                   }}
-                ></Button>
+                >
+                  Hapus
+                </Button>
               </ModalFooter>
             </>
           )}

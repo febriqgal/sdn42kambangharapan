@@ -43,13 +43,13 @@ export default function SignUp() {
           toast.error("Terjadi kesalahan, silahkan coba lagi");
         }
       });
-    // if (data.email) {
-    //   await updateProfile(auth.currentUser, {
-    //     displayName: data.namalengkap,
-    //   });
-    // } else {
-    //   return null;
-    // }
+    if (data.email) {
+      await updateProfile(auth.currentUser, {
+        displayName: data.namalengkap,
+      });
+    } else {
+      return null;
+    }
   };
   return (
     <>

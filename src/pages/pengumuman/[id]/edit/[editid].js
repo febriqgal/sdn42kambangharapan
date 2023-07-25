@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Spinner } from "@nextui-org/react";
+import { Button, Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -86,7 +86,7 @@ export default function detail() {
               {...register("isi")}
             />
           </label>
-          <button
+          <Button
             onClick={async () => {
               const docRef = doc(db, "pengumuman", `${id}`);
               const storage = getStorage(app);
@@ -98,14 +98,14 @@ export default function detail() {
             className="px-3 py-1 mb-2 text-white bg-red-500 rounded-lg"
           >
             Hapus
-          </button>
-          <button
+          </Button>
+          <Button
             disabled={isDisable}
             className="w-full px-3 py-1 mb-2 duration-1000 rounded-lg shadow-lg hover:bg-gray-900 hover:text-white hover:cursor-pointer"
             type="submit"
           >
             Kirim
-          </button>
+          </Button>
         </form>
       </div>
     );

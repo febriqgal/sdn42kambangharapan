@@ -39,7 +39,9 @@ export default function ProfileC() {
           >
             Dashboard
           </DropdownItem>
-        ) : null}
+        ) : (
+          <DropdownItem></DropdownItem>
+        )}
         {user ? (
           <DropdownItem
             onPress={async () => {
