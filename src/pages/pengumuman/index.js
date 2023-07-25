@@ -43,7 +43,7 @@ export default function LayouUser() {
   if (isLoading) {
     return (
       <Layout>
-        <div className={"flex justify-center items-start min-h-screen"}>
+        <div className={"flex justify-center items-start py-5 min-h-screen"}>
           <Spinner color={"currentColor"} />
         </div>
       </Layout>
@@ -60,6 +60,42 @@ export default function LayouUser() {
         </Head>
 
         <div className="grid grid-cols-1 gap-5 px-5 py-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="w-full max-w-sm mx-auto bg-white shadow-lg rounded-xl">
+            <div
+              onClick={() => {
+                route.push("/pengumuman/syaratpendaftaran");
+              }}
+              className="rounded-t-lg shadow-xl overflow-clip rounded-br-3xl hover:cursor-pointer"
+            >
+              <div
+                className="flex items-center justify-center w-full h-48 text-lg font-bold text-center"
+                alt={"#"}
+              >
+                Syarat Pendaftaran
+              </div>
+            </div>
+            <div className="px-5 py-5">
+              <div className="justify-between mb-4">
+                <h5 className="text-xl font-bold text-gray-900">
+                  <div className={styles.truncate2}>Syarat Pendaftaran</div>
+                </h5>
+                <div className="flex justify-between mt-1">
+                  <div className="flex items-center gap-2">
+                    <Image src={penulis} width={20} alt={"#"} />
+                    <h5 className="text-xs font-medium text-gray-900 ">
+                      Admin
+                    </h5>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Tooltip shadow={true}>
+                      <h5 className="text-xs font-medium text-gray-900 "></h5>
+                    </Tooltip>
+                  </div>
+                </div>
+              </div>
+              <div className="h-20 text-base text-gray-700"></div>
+            </div>
+          </div>
           {data.map((e, i) => {
             const Data = e.data();
             return (

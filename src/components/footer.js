@@ -75,30 +75,24 @@ const navigation = {
 
 export default function FooterC() {
   return (
-    <footer className="bg-primary">
+    <footer className="bg-gradient-to-br from-primary-100 to-primary-200">
       <div className="flex flex-col-reverse items-center justify-between px-20 py-10 sm:flex-row">
         <div className="flex flex-col items-center mt-10 sm:items-start sm:mt-0">
-          <h1 className="text-gray-400 hover:text-gray-500">
+          <h1 className="text-white">
             SDN 42 Kambang Harapan, Kambang, Pesisir Selatan.
           </h1>
-          <div className="flex mt-8 space-x-6">
+          <div className="flex mt-8 space-x-6 text-white">
             {navigation.social.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-400 hover:text-gray-500"
-              >
+              <a key={item.name} href={item.href}>
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="w-6 h-6" aria-hidden="true" />
               </a>
             ))}
           </div>
-          <p className="mt-8 text-base text-gray-400">
-            &copy; 2023 - Rizky Minaldo.
-          </p>
+          <p className="mt-8 text-white">&copy; 2023 - Rizky Minaldo.</p>
         </div>
         <iframe
-          className="h-[200px] w-full sm:w-[600px] rounded-xl"
+          className="h-[200px] w-full sm:w-[600px] rounded-xl outline outline-white outline-offset-4"
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15952.495403192492!2d100.7171115!3d-1.669911!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2cd1ef5a8149fb%3A0x632bc5d7c9932516!2sSDN%2042%20Kambang%20Harapan!5e0!3m2!1sid!2sid!4v1689479494996!5m2!1sid!2sid"
           allowfullscreen=""
           loading="lazy"

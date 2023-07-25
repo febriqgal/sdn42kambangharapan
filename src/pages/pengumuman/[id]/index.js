@@ -1,28 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable react-hooks/rules-of-hooks */
-import { Loading, Modal, Spinner, Tooltip } from "@nextui-org/react";
+import { db } from "@/server/db";
+import { Button, Spinner, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
-import { deleteObject, getStorage, ref } from "firebase/storage";
+import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import Layout from "../../../components/layout";
-import { useUser } from "../../../context/user";
 import dibuat from "../../../../public/dibuat.svg";
 import dilihat from "../../../../public/dilihat.svg";
 import edit from "../../../../public/edit.svg";
-import hapus from "../../../../public/hapus.svg";
 import penulis from "../../../../public/penulis.svg";
-import { db } from "@/server/db";
+import Layout from "../../../components/layout";
+import { useUser } from "../../../context/user";
 import styles from "../../../styles/Home.module.css";
-import app from "@/server/db";
-export default function detail() {
+import ModalHapus from "./ModalHapus";
+export default function Detail() {
   const [isLoading, setIsloading] = useState(true);
   const route = useRouter();
   const { id } = route.query;
@@ -86,56 +83,19 @@ export default function detail() {
                 </div>
                 {email === "admin@gmail.com" ? (
                   <>
-                    <button
-                      onClick={() => {
-                        handler();
+                    <ModalHapus data={post} />
+                    <Button
+                      onPress={() => {
+                        route.push(`${id}/edit/${post.judul}`);
                       }}
                     >
-                      <Tooltip content={"Hapus"}>
-                        <Image width={20} src={hapus} alt={"#"} />
-                      </Tooltip>
-                    </button>
-                    <Link href={`${id}/edit/${post.judul}`}>
-                      <Tooltip content={"Edit"}>
-                        <Image width={20} src={edit} alt={"#"} />
-                      </Tooltip>
-                    </Link>
+                      Edit
+                    </Button>
                   </>
                 ) : (
                   <></>
                 )}
               </div>
-              {/* modal hapus */}
-              <Modal
-                closeButton
-                blur
-                aria-labelledby="modal-title"
-                open={visible}
-                onClose={closeHandler}
-              >
-                <Modal.Body>
-                  <h1 className="m-auto text-center">Yakin Menghapus?</h1>
-                  <button
-                    className="px-4 py-1 text-white bg-red-500 rounded-lg"
-                    onClick={async () => {
-                      const docRef = doc(db, "pengumuman", `${id}`);
-                      const storage = getStorage(app);
-                      const desertRef = ref(
-                        storage,
-                        `image/pengumuman/${post.gambar}`
-                      );
-                      await deleteObject(desertRef);
-                      await deleteDoc(docRef);
-                      route.push("/");
-                      setTimeout(() => {
-                        window.location.reload();
-                      }, 3000);
-                    }}
-                  >
-                    Hapus
-                  </button>
-                </Modal.Body>
-              </Modal>
             </div>
             <div className="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
               <div className="relative lg:row-start-1 lg:col-start-2">

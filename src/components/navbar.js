@@ -1,4 +1,4 @@
-import { Navbar, Text } from "@nextui-org/react";
+import { Button, Navbar, Text } from "@nextui-org/react";
 import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,25 +16,25 @@ export default function NavbarC() {
   ];
 
   return (
-    <nav className="fixed top-0 z-50 flex items-center justify-between w-full px-20 bg-white">
+    <nav className="fixed top-0 z-50 flex items-center justify-between w-full px-20 bg-gradient-to-br from-primary-100 to-primary-200">
       <div className="flex items-center justify-center">
         <LogoSD className={"h-11 mr-2"} />
-        <h1 className="font-bold">SDN 42 Kambang Harapan</h1>
+        <h1 className="font-bold text-white">SDN 42 Kambang Harapan</h1>
       </div>
       <div className="flex items-center gap-3 py-4">
         {navigation.map((e, i) => {
           return (
-            <Link
-              className={
-                route.pathname != e.href
-                  ? ""
-                  : "font-bold underline underline-offset-8"
-              }
+            <Button
+              variant={route.pathname != e.href ? "light" : "flat"}
+              onPress={() => {
+                route.push(e.href);
+              }}
+              className={"text-white"}
               href={e.href}
               key={i}
             >
               {e.title}
-            </Link>
+            </Button>
           );
         })}
         <ProfileC />

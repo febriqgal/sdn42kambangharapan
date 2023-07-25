@@ -63,7 +63,7 @@ export default function HasilSeleksi() {
   if (isLoading) {
     return (
       <Layout>
-        <div className={`flex justify-center items-start min-h-screen`}>
+        <div className={`flex justify-center items-start pt-5 min-h-screen`}>
           <Spinner color={"currentColor"} />
         </div>
       </Layout>
@@ -84,6 +84,7 @@ export default function HasilSeleksi() {
             aria-label="Example static collection table"
           >
             <TableHeader>
+              <TableColumn>No.</TableColumn>
               <TableColumn>Nama Lengkap</TableColumn>
               <TableColumn>Alamat</TableColumn>
               <TableColumn>Keterangan</TableColumn>
@@ -93,6 +94,7 @@ export default function HasilSeleksi() {
                 const Data = e.data();
                 return (
                   <TableRow key={i}>
+                    <TableCell>{i + 1}.</TableCell>
                     <TableCell>{Data.nmlengkap}</TableCell>
                     <TableCell>{Data.alamat}</TableCell>
                     <TableCell>

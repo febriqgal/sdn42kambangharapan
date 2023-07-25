@@ -9,13 +9,13 @@ import NextNProgress from "nextjs-progressbar";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Head>
-        <title>SDN 42 Kambang Harapan</title>
-      </Head>
       <NextUIProvider>
+        <Head>
+          <title>SDN 42 Kambang Harapan</title>
+        </Head>
         <UserProvider>
           <AuthStateChangeProvider>
-            <NextNProgress color="#172554" />
+            <NextNProgress color="#ffff" />
             <Component {...pageProps} />
           </AuthStateChangeProvider>
         </UserProvider>

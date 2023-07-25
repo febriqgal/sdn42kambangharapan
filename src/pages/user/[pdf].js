@@ -101,9 +101,7 @@ export default function Pdf() {
               </Text>
               <Text style={{ fontSize: 10, fontWeight: "bold" }}>LULUS</Text>
               <Text style={{ fontSize: 10, marginTop: 32 }}>
-                Dengan ini menyatakan bahwa Febriqgal purnama telah lulus
-                melewati segala seleksi tes yang telah di laksanakan dengan
-                baik.
+                {`Dengan ini menyatakan bahwa ${post.nmlengkap} telah lulus melewati segala seleksi tes yang telah di laksanakan dengan baik.`}
               </Text>
               <View style={{ marginTop: 60 }}>
                 <Text

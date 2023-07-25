@@ -10,9 +10,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: "#172554",
-      },
+      colors: { background: "cccccc" },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -21,5 +19,35 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            text: {
+              100: "#333333",
+              200: "#5c5c5c",
+            },
+            primary: {
+              100: "#0077C2",
+              200: "#59a5f5",
+              300: "#c8ffff",
+              DEFAULT: "#0077C2",
+              foreground: "#ffffff",
+            },
+          },
+        },
+      },
+    }),
+  ],
 };
+// --primary-100:#0077C2;
+// --primary-200:#59a5f5;
+// --primary-300:#c8ffff;
+// --accent-100:#00BFFF;
+// --accent-200:#00619a;
+// --text-100:#333333;
+// --text-200:#5c5c5c;
+// --bg-100:#FFFFFF;
+// --bg-200:#f5f5f5;
+// --bg-300:#cccccc;
