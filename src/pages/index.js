@@ -15,16 +15,18 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <section className="relative  bg-[url(https://images.unsplash.com/photo-1665664660924-255a6167f498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-primary-100/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
+        <div className="absolute inset-0 w-full bg-primary-100 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
 
-        <div className="relative max-w-screen-xl px-4 py-32 mx-auto sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-10">
-          <div className="max-w-2xl px-10 py-4 text-center text-white bg-opacity-50 bg-primary-100 rounded-xl ltr:sm:text-left rtl:sm:text-right">
-            <p className="text-xl">
-              Selamat datang di Website resmi pendaftaran siswa baru
-            </p>
-            <h1 className="text-2xl font-extrabold sm:text-5xl">
-              SDN 42 Kambang Harapan
-            </h1>
+        <div className="">
+          <div className="flex items-center justify-center w-full h-screen px-10 py-4 text-center text-white bg-opacity-50 bg-primary-100">
+            <div className="-mt-[70px]">
+              <p className="text-xl">
+                Selamat datang di Website resmi pendaftaran siswa baru
+              </p>
+              <h1 className="text-2xl font-extrabold sm:text-5xl">
+                SDN 42 Kambang Harapan
+              </h1>
+            </div>
           </div>
         </div>
       </section>

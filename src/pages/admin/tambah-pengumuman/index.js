@@ -76,7 +76,7 @@ export default function TambahPengumuman() {
           control={control}
           {...register("isi", { required: true })}
         />
-        <Button className="bg-red-500" type="submit">
+        <Button className="text-white bg-red-500" type="submit">
           Kirim
         </Button>
       </form>

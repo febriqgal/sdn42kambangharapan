@@ -59,7 +59,7 @@ export default function LayouUser() {
           <link rel="icon" href="/logo.png" />
         </Head>
 
-        <div className="grid grid-cols-1 gap-5 px-5 py-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 px-20 py-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <div className="w-full max-w-sm mx-auto bg-white shadow-lg rounded-xl">
             <div
               onClick={() => {

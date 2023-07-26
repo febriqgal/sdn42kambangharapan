@@ -76,7 +76,7 @@ export default function HasilSeleksi() {
         <Head>
           <title>Hasil Seleksi - SDN 42 Kambang Harapan</title>
         </Head>
-        <div className="flex flex-col min-h-screen gap-3">
+        <div className="flex flex-col min-h-screen gap-3 px-20 py-5">
           <Table
             color={selectedColor}
             selectionMode="single"

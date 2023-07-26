@@ -7,6 +7,13 @@ import Head from "next/head";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
 import { Fragment } from "react";
 import LayoutAdmin from "@/components/layout/layout-admin";
@@ -66,6 +73,9 @@ export default function HasilSeleksi() {
                   Tanggal Lahir
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Umur
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Jenis Kelamin
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
@@ -76,7 +86,7 @@ export default function HasilSeleksi() {
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Nama Ibu
-                </th>{" "}
+                </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   File
                 </th>
@@ -107,6 +117,9 @@ export default function HasilSeleksi() {
                       {Data.tgllahir}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
+                      {Data.umur} Thn
+                    </td>
+                    <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.jeniskelamin}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
@@ -126,7 +139,66 @@ export default function HasilSeleksi() {
                         Link
                       </a>
                     </td>
-                    <div></div>
+                    {Data.ket != "Diterima" ? (
+                      <Dropdown>
+                        <DropdownTrigger>
+                          <Button
+                            color={
+                              Data.ket === "Tidak Diterima"
+                                ? "danger"
+                                : "default"
+                            }
+                            className="flex items-center justify-center mt-1 ml-4 text-center text-white"
+                          >
+                            {Data.ket != "-" ? Data.ket : "Pilih"}
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu aria-label="Static Actions">
+                          <DropdownItem
+                            onPress={async () => {
+                              const washingtonRef = doc(
+                                db,
+                                "pendaftaran",
+                                e.id
+                              );
+
+                              await updateDoc(washingtonRef, {
+                                ket: "Diterima",
+                              });
+                              route.refresh();
+                            }}
+                            key="new"
+                          >
+                            Diterima
+                          </DropdownItem>
+                          <DropdownItem
+                            onPress={async () => {
+                              const washingtonRef = doc(
+                                db,
+                                "pendaftaran",
+                                e.id
+                              );
+
+                              await updateDoc(washingtonRef, {
+                                ket: "Tidak Diterima",
+                              });
+                              route.refresh();
+                            }}
+                            key="copy"
+                          >
+                            Tidak Diterima
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    ) : (
+                      <Button
+                        isDisabled
+                        color="success"
+                        className="flex items-center justify-center mt-1 ml-4 text-center text-white"
+                      >
+                        Diterima
+                      </Button>
+                    )}
                   </tr>
                 );
               })}
