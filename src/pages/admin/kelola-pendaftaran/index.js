@@ -67,19 +67,22 @@ export default function HasilSeleksi() {
                   Nama Lengkap
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Agama
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Tempat Lahir
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Tanggal Lahir
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Agama
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Umur
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Jarak Rumah
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Prestasi
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   No. HP
@@ -119,20 +122,23 @@ export default function HasilSeleksi() {
                     <td className="px-4 py-2 font-medium text-gray-900 text-start">
                       {Data.nmlengkap}
                     </td>
-                    <td className="px-4 py-2 font-medium text-gray-900 text-start">
-                      {Data.agama}
-                    </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.tempatlahir}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.tgllahir}
                     </td>
+                    <td className="px-4 py-2 font-medium text-gray-900 text-start">
+                      {Data.agama}
+                    </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.umur} Thn
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.jarak} KM
+                    </td>
+                    <td className="px-4 py-2 text-gray-700 text-start">
+                      {Data.prestasi === "" ? "-" : Data.prestasi}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.nohp}

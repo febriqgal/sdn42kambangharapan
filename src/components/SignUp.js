@@ -16,17 +16,19 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { Toaster, toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 export default function SignUp() {
+  const route = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const auth = getAuth();
 
-  const { register, handleSubmit, resetField } = useForm();
+  const { register, handleSubmit, resetField, reset } = useForm();
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        alert(`Berhasil ${user}`);
+        toast.success("Berhasil mendaftar");
 
         // ...
       })
