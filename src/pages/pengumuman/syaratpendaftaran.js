@@ -70,9 +70,6 @@ export default function SyaratPendafataran() {
               </div>
               <div className="mx-auto mt-5 prose text-gray-500 prose-indigo lg:max-w-none lg:row-start-1 lg:col-start-1">
                 <ul class="list-disc ml-5">
-                  <h1 className="text-justify">
-                    Bebereapa Syarat pendaftaran:
-                  </h1>
                   <li>Umur Minimal 7 Tahun</li>
                   <li>Jarak rumah dari sekolah maksimal 2 KM</li>
                   <li>{`Hafalan 1 juz Alquran (Jalur Prestasi)`}</li>
