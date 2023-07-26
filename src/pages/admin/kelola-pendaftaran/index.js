@@ -53,7 +53,7 @@ export default function HasilSeleksi() {
         <Head>
           <title>Kelola Pendaftaran - SDN 42 Kambang Harapan</title>
         </Head>
-        <div className="w-full px-5">
+        <div className="w-full px-5 overflow-y-auto">
           <table className="w-full text-sm bg-white divide-y-2 divide-gray-200 ">
             <thead className="ltr:text-left rtl:text-right">
               <tr>
@@ -67,6 +67,9 @@ export default function HasilSeleksi() {
                   Nama Lengkap
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Agama
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Tempat Lahir
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
@@ -74,6 +77,12 @@ export default function HasilSeleksi() {
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Umur
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Jarak Rumah
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  No. HP
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Jenis Kelamin
@@ -110,6 +119,9 @@ export default function HasilSeleksi() {
                     <td className="px-4 py-2 font-medium text-gray-900 text-start">
                       {Data.nmlengkap}
                     </td>
+                    <td className="px-4 py-2 font-medium text-gray-900 text-start">
+                      {Data.agama}
+                    </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.tempatlahir}
                     </td>
@@ -118,6 +130,12 @@ export default function HasilSeleksi() {
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.umur} Thn
+                    </td>
+                    <td className="px-4 py-2 text-gray-700 text-start">
+                      {Data.jarak} KM
+                    </td>
+                    <td className="px-4 py-2 text-gray-700 text-start">
+                      {Data.nohp}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.jeniskelamin}
