@@ -51,7 +51,7 @@ export default function Pdf() {
           >
             <View>
               <Text style={{ textAlign: "center" }}>
-                Bukti Lulus Selekti Masuk SDN 42 Kambang Harapan
+                Bukti Lulus Seleksi Masuk SDN 42 Kambang Harapan
               </Text>
 
               <View

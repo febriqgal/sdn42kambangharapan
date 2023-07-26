@@ -383,7 +383,8 @@ const Pendaftaran = () => {
                   Perkiraan Jarak Rumah
                 </h1>
                 <h1 className="text-[10px] font-medium text-red-500">
-                  *Satuan KM,
+                  *Satuan KM, Jika jaraknya berkoma, contoh: 500 M, Berarti 0.5
+                  KM.
                 </h1>
               </div>
 
