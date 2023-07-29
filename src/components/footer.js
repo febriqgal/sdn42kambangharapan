@@ -68,9 +68,9 @@ export default function FooterC() {
         <iframe
           className="h-[200px] w-full sm:w-[600px] rounded-xl outline outline-white outline-offset-4"
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15952.495403192492!2d100.7171115!3d-1.669911!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2cd1ef5a8149fb%3A0x632bc5d7c9932516!2sSDN%2042%20Kambang%20Harapan!5e0!3m2!1sid!2sid!4v1689479494996!5m2!1sid!2sid"
-          allowfullscreen=""
+          allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
     </footer>

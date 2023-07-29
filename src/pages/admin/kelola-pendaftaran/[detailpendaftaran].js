@@ -16,6 +16,7 @@ import dilihat from "../../../../public/dilihat.svg";
 import penulis from "../../../../public/penulis.svg";
 import { useUser } from "../../../context/user";
 import styles from "../../../styles/Home.module.css";
+import LayoutAdmin from "@/components/layout/layout-admin";
 
 export default function Detail() {
   const [isLoading, setIsloading] = useState(true);
@@ -51,7 +52,7 @@ export default function Detail() {
   } else {
     const post = snapshot.current;
     return (
-      <LayoutUser>
+      <LayoutAdmin>
         <Toaster />
         <Head>
           <title>{post.nmlengkap}</title>
@@ -77,7 +78,9 @@ export default function Detail() {
 
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Tanggal Lahir</dt>
-              <dd className="text-gray-700 sm:col-span-2">{post.tgllahir}</dd>
+              <dd className="text-gray-700 sm:col-span-2">
+                {dayjs(post.tgllahir).format("DD-MM-YYYY")}
+              </dd>
             </div>
 
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
@@ -147,7 +150,7 @@ export default function Detail() {
             </div>
           </dl>
         </div>
-      </LayoutUser>
+      </LayoutAdmin>
     );
   }
 }

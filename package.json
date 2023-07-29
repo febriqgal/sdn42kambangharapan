@@ -12,6 +12,7 @@
     "@nextui-org/react": "^0.0.0-dev-v2-20230724140319",
     "@react-pdf/renderer": "^3.1.12",
     "autoprefixer": "10.4.14",
+    "dayjs": "^1.11.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "firebase": "^10.0.0",

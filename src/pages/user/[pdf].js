@@ -84,9 +84,9 @@ export default function Pdf() {
                   <Text
                     style={{ marginTop: 8, fontSize: 10 }}
                   >{`: ${post.jeniskelamin}`}</Text>
-                  <Text
-                    style={{ marginTop: 8, fontSize: 10 }}
-                  >{`: ${post.tempatlahir}, ${post.tgllahir}`}</Text>
+                  <Text style={{ marginTop: 8, fontSize: 10 }}>{`: ${
+                    post.tempatlahir
+                  },  ${dayjs(post.tgllahir).format("DD-MM-YYYY")}`}</Text>
                   <Text
                     style={{ marginTop: 8, fontSize: 10 }}
                   >{`: ${post.agama}`}</Text>
