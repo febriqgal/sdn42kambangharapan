@@ -100,10 +100,10 @@ export default function HasilSeleksi() {
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell> </TableCell>
-                <TableCell> </TableCell>
-                <TableCell> </TableCell>
-                <TableCell> </TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
                 <TableCell className="font-medium text-center bg-[#F4F4F5] text-[#71717A]">
                   Prestasi
                 </TableCell>
@@ -111,7 +111,7 @@ export default function HasilSeleksi() {
                   Zonasi
                 </TableCell>
                 <TableCell className="font-medium bg-[#F4F4F5] text-[#71717A] text-center">
-                  umur
+                  Umur
                 </TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
@@ -122,7 +122,7 @@ export default function HasilSeleksi() {
                 return (
                   <TableRow key={i}>
                     <TableCell>{i + 1}.</TableCell>
-                    <TableCell>{Data.nik}.</TableCell>
+                    <TableCell>{Data.nik}</TableCell>
                     <TableCell>{Data.nmlengkap}</TableCell>
                     <TableCell>{Data.alamat}</TableCell>
                     <TableCell className="text-center">
@@ -132,10 +132,10 @@ export default function HasilSeleksi() {
                       {Data.jarak <= 2 ? "✓" : "-"}
                     </TableCell>
                     <TableCell className="text-center">
-                      {Data.umur >= 7 ? "✓" : "-"}
+                      {Data.umur >= 7 ? "✓" : "- "}
                     </TableCell>
                     <TableCell>
-                      {dayjs(Data.tanggaldaftar).format("ddd, D MMM, YYYY")}.
+                      {dayjs(Data.tanggaldaftar).format("ddd, D MMM, YYYY")}
                     </TableCell>
                     <TableCell>
                       <Chip
