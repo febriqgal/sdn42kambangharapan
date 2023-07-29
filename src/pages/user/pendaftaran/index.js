@@ -21,7 +21,7 @@ const Pendaftaran = () => {
   const route = useRouter();
   const uidUser = useUser().uid;
   const snapshot = useRef(null);
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsloading] = useState(false);
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { register, handleSubmit, control, reset } = useForm();
@@ -49,7 +49,7 @@ const Pendaftaran = () => {
     if (ageValue < 7) {
       toast.error("Umur Minimal 7 Tahun Keatas");
     } else {
-      setIsloading(true);
+      setIsloading(false);
       await uploadBytes(storageRef, imageUpload2);
       await setDoc(doc(db, "pendaftaran", uidUser), {
         uid: user.uid,
@@ -70,6 +70,7 @@ const Pendaftaran = () => {
         nohp: data.nohp,
         prestasi: data.prestasi,
         pdf: storageRef.name,
+        tanggaldaftar: Date(Date.now()),
         jarak: data.jarak,
         jalur: "-",
         ket: "-",
@@ -156,7 +157,7 @@ const Pendaftaran = () => {
                 id="namalengkap"
                 defaultValue={user?.displayName ?? ""}
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("namalengkap", { required: true })}
+                {...register("namalengkap", { required: false })}
               />
             </label>
             <label
@@ -171,7 +172,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="tempatlahir"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("tempatlahir", { required: true })}
+                {...register("tempatlahir", { required: false })}
               />
             </label>
             <label
@@ -186,7 +187,7 @@ const Pendaftaran = () => {
                 type="date"
                 id="tanggallahir"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("tanggallahir", { required: true })}
+                {...register("tanggallahir", { required: false })}
               />
             </label>
 
@@ -201,7 +202,7 @@ const Pendaftaran = () => {
               <select
                 id="jeniskelamin"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("jeniskelamin", { required: true })}
+                {...register("jeniskelamin", { required: false })}
               >
                 <option>-Pilih Jenis Kelamin-</option>
                 <option value="Laki - Laki">Laki - Laki</option>
@@ -217,7 +218,7 @@ const Pendaftaran = () => {
               <select
                 id="agama"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("agama", { required: true })}
+                {...register("agama", { required: false })}
               >
                 <option>-Pilih agama-</option>
                 <option value="Islam">Islam</option>
@@ -236,7 +237,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="alamat"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("alamat", { required: true })}
+                {...register("alamat", { required: false })}
               />
             </label>
             <label
@@ -249,7 +250,7 @@ const Pendaftaran = () => {
                 type="number"
                 id="nik"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("nik", { required: true })}
+                {...register("nik", { required: false })}
               />
             </label>
             <label
@@ -264,7 +265,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="namaayah"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("namaayah", { required: true })}
+                {...register("namaayah", { required: false })}
               />
             </label>
             <label
@@ -278,7 +279,7 @@ const Pendaftaran = () => {
               <select
                 id="agamaayah"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("agamaayah", { required: true })}
+                {...register("agamaayah", { required: false })}
               >
                 <option>-Pilih agama ayah-</option>
                 <option value="Islam">Islam</option>
@@ -299,7 +300,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="pekerjaanayah"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("pekerjaanayah", { required: true })}
+                {...register("pekerjaanayah", { required: false })}
               />
             </label>
             <label
@@ -314,7 +315,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="namaibu"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("namaibu", { required: true })}
+                {...register("namaibu", { required: false })}
               />
             </label>
             <label
@@ -328,7 +329,7 @@ const Pendaftaran = () => {
               <select
                 id="agamaibu"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("agamaibu", { required: true })}
+                {...register("agamaibu", { required: false })}
               >
                 <option>-Pilih agama ibu-</option>
                 <option value="Islam">Islam</option>
@@ -349,7 +350,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="pekerjaanibu"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("pekerjaanibu", { required: true })}
+                {...register("pekerjaanibu", { required: false })}
               />
             </label>
             <label
@@ -362,7 +363,7 @@ const Pendaftaran = () => {
                 type="tel"
                 id="nohp"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("nohp", { required: true })}
+                {...register("nohp", { required: false })}
               />
             </label>
             <label
@@ -401,7 +402,7 @@ const Pendaftaran = () => {
                 type="number"
                 id="jarak"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("jarak", { required: true })}
+                {...register("jarak", { required: false })}
               />
             </label>
 

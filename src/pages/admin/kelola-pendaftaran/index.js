@@ -72,17 +72,18 @@ export default function HasilSeleksi() {
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Tanggal Lahir
                 </th>
-
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  No. HP
-                </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Jenis Kelamin
                 </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Alamat
                 </th>
-
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Jarak
+                </th>
+                <th className="px-4 py-2 font-medium text-gray-900 text-start">
+                  Prestasi
+                </th>
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   File
                 </th>
@@ -113,17 +114,18 @@ export default function HasilSeleksi() {
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {dayjs(Data.tgllahir).format("DD-MM-YYYY")}
                     </td>
-
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.nohp}
-                    </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.jeniskelamin}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.alamat}
                     </td>
-
+                    <td className="px-4 py-2 text-gray-700 text-start">
+                      {Data.jarak} KM
+                    </td>
+                    <td className="px-4 py-2 text-gray-700 text-start">
+                      {Data.prestasi}
+                    </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       <a
                         target="_blank"
@@ -194,7 +196,6 @@ export default function HasilSeleksi() {
                         </Button>
                       )}
                     </td>
-
                     <td className="px-4 py-2 text-gray-700 text-start">
                       <Button
                         onPress={() => {

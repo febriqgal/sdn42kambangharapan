@@ -68,26 +68,22 @@ export default function Detail() {
               <dt className="font-medium text-gray-900">Nama Lengkap</dt>
               <dd className="text-gray-700 sm:col-span-2">{post.nmlengkap}</dd>
             </div>
-
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Tempat Lahir</dt>
               <dd className="text-gray-700 sm:col-span-2">
                 {post.tempatlahir}
               </dd>
             </div>
-
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Tanggal Lahir</dt>
               <dd className="text-gray-700 sm:col-span-2">
                 {dayjs(post.tgllahir).format("DD-MM-YYYY")}
               </dd>
             </div>
-
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Umur</dt>
               <dd className="text-gray-700 sm:col-span-2">{post.umur}</dd>
             </div>
-
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Jenis Kelamin</dt>
               <dd className="text-gray-700 sm:col-span-2">
@@ -147,6 +143,12 @@ export default function Detail() {
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Jarak Rumah</dt>
               <dd className="text-gray-700 sm:col-span-2">{post.jarak} KM</dd>
+            </div>{" "}
+            <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900">Tanggal Daftar</dt>
+              <dd className="text-gray-700 sm:col-span-2">
+                {dayjs(post.tanggaldaftar).format("ddd, D MMM, YYYY")}
+              </dd>
             </div>
           </dl>
         </div>
