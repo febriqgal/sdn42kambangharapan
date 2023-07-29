@@ -87,6 +87,7 @@ export default function HasilSeleksi() {
               <TableColumn>No.</TableColumn>
               <TableColumn>Nama Lengkap</TableColumn>
               <TableColumn>Alamat</TableColumn>
+              <TableColumn>Jalur</TableColumn>
               <TableColumn>Keterangan</TableColumn>
             </TableHeader>
             <TableBody>
@@ -97,6 +98,7 @@ export default function HasilSeleksi() {
                     <TableCell>{i + 1}.</TableCell>
                     <TableCell>{Data.nmlengkap}</TableCell>
                     <TableCell>{Data.alamat}</TableCell>
+                    <TableCell>{Data.jalur ?? "-"}</TableCell>
                     <TableCell>
                       <Chip
                         color={Data.ket === "Diterima" ? "success" : "danger"}

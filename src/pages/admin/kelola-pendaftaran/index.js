@@ -72,18 +72,7 @@ export default function HasilSeleksi() {
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Tanggal Lahir
                 </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Agama
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Umur
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Jarak Rumah
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Prestasi
-                </th>
+
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   No. HP
                 </th>
@@ -93,18 +82,14 @@ export default function HasilSeleksi() {
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   Alamat
                 </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Nama Ayah
-                </th>
-                <th className="px-4 py-2 font-medium text-gray-900 text-start">
-                  Nama Ibu
-                </th>
+
                 <th className="px-4 py-2 font-medium text-gray-900 text-start">
                   File
                 </th>
                 <th className="px-4 py-2 font-medium text-center text-gray-900">
                   Keterangan
                 </th>
+                <th className="px-4 py-2 font-medium text-center text-gray-900"></th>
               </tr>
             </thead>
 
@@ -128,18 +113,7 @@ export default function HasilSeleksi() {
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.tgllahir}
                     </td>
-                    <td className="px-4 py-2 font-medium text-gray-900 text-start">
-                      {Data.agama}
-                    </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.umur} Thn
-                    </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.jarak} KM
-                    </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.prestasi === "" ? "-" : Data.prestasi}
-                    </td>
+
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.nohp}
                     </td>
@@ -149,12 +123,7 @@ export default function HasilSeleksi() {
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.alamat}
                     </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.nmayah}
-                    </td>
-                    <td className="px-4 py-2 text-gray-700 text-start">
-                      {Data.nmibu}
-                    </td>
+
                     <td className="px-4 py-2 text-gray-700 text-start">
                       <a
                         target="_blank"
@@ -163,66 +132,78 @@ export default function HasilSeleksi() {
                         Link
                       </a>
                     </td>
-                    {Data.ket != "Diterima" ? (
-                      <Dropdown>
-                        <DropdownTrigger>
-                          <Button
-                            color={
-                              Data.ket === "Tidak Diterima"
-                                ? "danger"
-                                : "default"
-                            }
-                            className="flex items-center justify-center mt-1 ml-4 text-center text-white"
-                          >
-                            {Data.ket != "-" ? Data.ket : "Pilih"}
-                          </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu aria-label="Static Actions">
-                          <DropdownItem
-                            onPress={async () => {
-                              const washingtonRef = doc(
-                                db,
-                                "pendaftaran",
-                                e.id
-                              );
+                    <td className="flex items-center justify-center px-4 py-2 text-center text-gray-700">
+                      {Data.ket != "Diterima" ? (
+                        <Dropdown>
+                          <DropdownTrigger>
+                            <Button
+                              color={
+                                Data.ket === "Tidak Diterima"
+                                  ? "danger"
+                                  : "default"
+                              }
+                              className="flex items-center justify-center text-center text-white"
+                            >
+                              {Data.ket != "-" ? Data.ket : "Pilih"}
+                            </Button>
+                          </DropdownTrigger>
+                          <DropdownMenu aria-label="Static Actions">
+                            <DropdownItem
+                              onPress={async () => {
+                                const washingtonRef = doc(
+                                  db,
+                                  "pendaftaran",
+                                  e.id
+                                );
 
-                              await updateDoc(washingtonRef, {
-                                ket: "Diterima",
-                              });
-                              route.refresh();
-                            }}
-                            key="new"
-                          >
-                            Diterima
-                          </DropdownItem>
-                          <DropdownItem
-                            onPress={async () => {
-                              const washingtonRef = doc(
-                                db,
-                                "pendaftaran",
-                                e.id
-                              );
+                                await updateDoc(washingtonRef, {
+                                  ket: "Diterima",
+                                });
+                                route.refresh();
+                              }}
+                              key="new"
+                            >
+                              Diterima
+                            </DropdownItem>
+                            <DropdownItem
+                              onPress={async () => {
+                                const washingtonRef = doc(
+                                  db,
+                                  "pendaftaran",
+                                  e.id
+                                );
 
-                              await updateDoc(washingtonRef, {
-                                ket: "Tidak Diterima",
-                              });
-                              route.refresh();
-                            }}
-                            key="copy"
-                          >
-                            Tidak Diterima
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    ) : (
+                                await updateDoc(washingtonRef, {
+                                  ket: "Tidak Diterima",
+                                });
+                                route.refresh();
+                              }}
+                              key="copy"
+                            >
+                              Tidak Diterima
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </Dropdown>
+                      ) : (
+                        <Button
+                          isDisabled
+                          color="success"
+                          className="flex items-center justify-center text-center text-white"
+                        >
+                          Diterima
+                        </Button>
+                      )}
+                    </td>
+
+                    <td className="px-4 py-2 text-gray-700 text-start">
                       <Button
-                        isDisabled
-                        color="success"
-                        className="flex items-center justify-center mt-1 ml-4 text-center text-white"
+                        onPress={() => {
+                          route.push(`/admin/kelola-pendaftaran/${e.id}`);
+                        }}
                       >
-                        Diterima
+                        Detail
                       </Button>
-                    )}
+                    </td>
                   </tr>
                 );
               })}

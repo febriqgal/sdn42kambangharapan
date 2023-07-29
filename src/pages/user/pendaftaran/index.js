@@ -58,17 +58,20 @@ const Pendaftaran = () => {
         prestasi: data.prestasi,
         pdf: storageRef.name,
         jarak: data.jarak,
+        jalur: "-",
         ket: "-",
       });
       if (data.prestasi != "") {
         const washingtonRef = doc(db, "pendaftaran", uidUser);
         await updateDoc(washingtonRef, {
           ket: "Diterima",
+          jalur: "Prestasi",
         });
       } else if (data.jarak <= 2) {
         const washingtonRef = doc(db, "pendaftaran", uidUser);
         await updateDoc(washingtonRef, {
           ket: "Diterima",
+          jalur: "Zonasi",
         });
       }
 
@@ -107,8 +110,13 @@ const Pendaftaran = () => {
         </Head>
         <div>
           <div className="flex flex-col items-center justify-center mb-4 space-x-2 place-self-center">
-            <h1 className="text-2xl text-center ">Formulir Pendaftaran</h1>
+            <h1 className="text-2xl text-center">Formulir Pendaftaran</h1>
+            <h1 className="text-2xl font-bold text-center">
+              SDN 42 Kambang Harapan T.A
+            </h1>
+            <h1 className="text-center ">Tahun Ajaran 2023 -2024</h1>
             <Button
+              className="my-4"
               onPress={() => {
                 route.push("/pengumuman/syaratpendaftaran");
               }}
