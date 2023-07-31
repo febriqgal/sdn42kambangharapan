@@ -112,7 +112,7 @@ export default function HasilSeleksi() {
                       {Data.tempatlahir}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
-                      {dayjs(Data.tgllahir).format("DD-MM-YYYY")}
+                      {dayjs(Data.tanggallahir).format("DD-MM-YYYY")}
                     </td>
                     <td className="px-4 py-2 text-gray-700 text-start">
                       {Data.jeniskelamin}

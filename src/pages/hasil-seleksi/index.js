@@ -48,7 +48,10 @@ export default function HasilSeleksi() {
   const snapshot = useRef(null);
   const [isLoading, setIsloading] = useState(true);
   const getDBFromFirestore = async () => {
-    const querySnapshot = query(collection(db, "pendaftaran"));
+    const querySnapshot = query(
+      collection(db, "pendaftaran"),
+      orderBy("nmlengkap", "asc")
+    );
     const gettt = await getDocs(querySnapshot);
     snapshot.current = gettt.docs;
     setTimeout(() => {
@@ -79,7 +82,7 @@ export default function HasilSeleksi() {
         <div className="flex flex-col min-h-screen gap-3 px-20 py-5">
           <div>
             <h1 className="text-xl font-bold text-center">
-              Hasil Seleksi PPBD SDN 42 Kambang Harapan
+              Laporan Hasil Seleksi PPBD SDN 42 Kambang Harapan
             </h1>
             <h1 className="text-center">Tahun Ajaran 2023 - 2024</h1>
           </div>
@@ -89,8 +92,8 @@ export default function HasilSeleksi() {
           >
             <TableHeader>
               <TableColumn>No.</TableColumn>
-              <TableColumn>NIK</TableColumn>
               <TableColumn>Nama Lengkap</TableColumn>
+              <TableColumn>NIK</TableColumn>
               <TableColumn>Alamat</TableColumn>
               <TableColumn className="text-start"></TableColumn>
               <TableColumn className="text-center">Syarat</TableColumn>
@@ -122,8 +125,8 @@ export default function HasilSeleksi() {
                 return (
                   <TableRow key={i}>
                     <TableCell>{i + 1}.</TableCell>
-                    <TableCell>{Data.nik}</TableCell>
                     <TableCell>{Data.nmlengkap}</TableCell>
+                    <TableCell>{Data.nik}</TableCell>
                     <TableCell>{Data.alamat}</TableCell>
                     <TableCell className="text-center">
                       {Data.prestasi ? "✓" : "-"}

@@ -77,7 +77,7 @@ export default function Detail() {
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Tanggal Lahir</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                {dayjs(post.tgllahir).format("DD-MM-YYYY")}
+                {dayjs(post.tanggallahir).format("DD-MM-YYYY")}
               </dd>
             </div>
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
@@ -147,7 +147,7 @@ export default function Detail() {
             <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900">Tanggal Daftar</dt>
               <dd className="text-gray-700 sm:col-span-2">
-                {dayjs(post.tanggaldaftar).format("ddd, D MMM, YYYY")}
+                {dayjs(post.tanggaldaftar).format("ddd, D MMM YYYY.")}
               </dd>
             </div>
           </dl>

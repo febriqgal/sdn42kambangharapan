@@ -21,7 +21,7 @@ const Pendaftaran = () => {
   const route = useRouter();
   const uidUser = useUser().uid;
   const snapshot = useRef(null);
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsloading] = useState(true);
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { register, handleSubmit, control, reset } = useForm();
@@ -55,7 +55,7 @@ const Pendaftaran = () => {
         uid: user.uid,
         nmlengkap: data.namalengkap,
         tempatlahir: data.tempatlahir,
-        tgllahir: Date(data.tanggallahir),
+        tanggallahir: data.tanggallahir,
         umur: ageValue,
         jeniskelamin: data.jeniskelamin,
         agama: data.agama,
@@ -98,7 +98,7 @@ const Pendaftaran = () => {
   const getDBFromFirestore = async () => {
     const docRef = doc(db, "pendaftaran", uidUser);
     const docSnap = await getDoc(docRef);
-    snapshot.current = docSnap.data();
+    snapshot.current = await docSnap.data();
 
     setTimeout(() => {
       setIsloading(false);
@@ -108,13 +108,7 @@ const Pendaftaran = () => {
   useEffect(() => {
     getDBFromFirestore();
   });
-  if (isLoading) {
-    <LayoutUser>
-      <div>
-        <Spinner color="primary" />
-      </div>
-    </LayoutUser>;
-  }
+
   if (snapshot.current?.uid != uidUser || snapshot.current == null) {
     return (
       <LayoutUser>
