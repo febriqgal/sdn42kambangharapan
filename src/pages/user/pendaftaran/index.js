@@ -75,19 +75,19 @@ const Pendaftaran = () => {
         jalur: "-",
         ket: "-",
       });
-      if (data.prestasi != "") {
-        const washingtonRef = doc(db, "pendaftaran", uidUser);
-        await updateDoc(washingtonRef, {
-          ket: "Diterima",
-          jalur: "Prestasi",
-        });
-      } else if (data.jarak <= 2) {
-        const washingtonRef = doc(db, "pendaftaran", uidUser);
-        await updateDoc(washingtonRef, {
-          ket: "Diterima",
-          jalur: "Zonasi",
-        });
-      }
+      // if (data.prestasi != "") {
+      //   const washingtonRef = doc(db, "pendaftaran", uidUser);
+      //   await updateDoc(washingtonRef, {
+      //     ket: "Diterima",
+      //     jalur: "Prestasi",
+      //   });
+      // } else if (data.jarak <= 2) {
+      //   const washingtonRef = doc(db, "pendaftaran", uidUser);
+      //   await updateDoc(washingtonRef, {
+      //     ket: "Diterima",
+      //     jalur: "Zonasi",
+      //   });
+      // }
 
       toast.success("Berhasil Melakukan Pendaftaran");
       setTimeout(() => {
