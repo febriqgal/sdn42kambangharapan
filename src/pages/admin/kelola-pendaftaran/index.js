@@ -210,6 +210,7 @@ export default function HasilSeleksi() {
               })}
             </tbody>
           </table>
+          <h1 className="text-center">sss</h1>
         </div>
       </LayoutAdmin>
     );

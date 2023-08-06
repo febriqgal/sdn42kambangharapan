@@ -4,10 +4,16 @@ import Layout from "@/components/layout";
 import { useUser } from "@/context/user";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 export default function Home() {
   const route = useRouter();
   const user = useUser().uid;
-
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  });
   return (
     <Layout>
       <Head>
