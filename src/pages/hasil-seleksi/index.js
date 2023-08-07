@@ -1,37 +1,29 @@
 import Layout from "@/components/layout";
-import Head from "next/head";
-import { Chip, Loading, Spinner, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Chip,
+  Spinner,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {
-  collection,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  updateDoc,
-} from "firebase/firestore";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  RadioGroup,
-  Radio,
-} from "@nextui-org/react";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import Head from "next/head";
 
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
-import dibuat from "../../../public/dibuat.svg";
-import penulis from "../../../public/penulis.svg";
 import { db } from "@/server/db";
-import styles from "../../styles/Home.module.css";
+import { useUser } from "@/context/user";
+
 export default function HasilSeleksi() {
+  const { uid, email } = useUser();
   const colors = [
     "default",
     "primary",
@@ -107,14 +99,15 @@ export default function HasilSeleksi() {
                 <TableCell></TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
-                <TableCell className="font-medium text-center bg-[#F4F4F5] text-[#71717A]">
-                  Prestasi
+                <TableCell className="font-medium bg-[#F4F4F5] text-[#71717A] text-center">
+                  Umur
                 </TableCell>
                 <TableCell className="font-medium bg-[#F4F4F5] text-[#71717A] text-center">
                   Zonasi
                 </TableCell>
-                <TableCell className="font-medium bg-[#F4F4F5] text-[#71717A] text-center">
-                  Umur
+
+                <TableCell className="font-medium text-center bg-[#F4F4F5] text-[#71717A]">
+                  Prestasi
                 </TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
@@ -129,13 +122,14 @@ export default function HasilSeleksi() {
                     <TableCell>{Data.nik}</TableCell>
                     <TableCell>{Data.alamat}</TableCell>
                     <TableCell className="text-center">
-                      {Data.prestasi ? "✓" : "-"}
+                      {Data.umur >= 7 ? "✓" : "- "}
                     </TableCell>
+
                     <TableCell className="text-center">
                       {Data.jarak <= 2 ? "✓" : "-"}
                     </TableCell>
                     <TableCell className="text-center">
-                      {Data.umur >= 7 ? "✓" : "- "}
+                      {Data.prestasi ? "✓" : "-"}
                     </TableCell>
                     <TableCell>
                       {dayjs(Data.tanggaldaftar).format("ddd, D MMM, YYYY")}
@@ -153,6 +147,21 @@ export default function HasilSeleksi() {
               })}
             </TableBody>
           </Table>
+          <div>
+            {email != "admin@gmail.com" ? (
+              <></>
+            ) : (
+              <Button
+                onPress={() => {
+                  route.push("/admin/kelola-pendaftaran/cetak");
+                }}
+                variant="shadow"
+                color="primary"
+              >
+                Cetak
+              </Button>
+            )}
+          </div>
         </div>
       </Layout>
     );

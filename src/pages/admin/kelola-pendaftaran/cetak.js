@@ -44,7 +44,7 @@ export default function Pdf() {
   }, []);
   if (isLoading) {
     return (
-      <div className={"flex"}>
+      <div className={"flex justify-center items-center min-h-screen"}>
         <Spinner color={"currentColor"} />
       </div>
     );
@@ -86,6 +86,14 @@ export default function Pdf() {
             size="A4"
             style={{ marginVertical: 32, marginLeft: 32, paddingRight: 64 }}
           >
+            <Text style={{ textAlign: "center", fontSize: 16 }}>
+              Laporan Hasil Seleksi PPBD SDN 42 Kambang Harapan
+            </Text>
+            <Text
+              style={{ textAlign: "center", marginBottom: 32, fontSize: 16 }}
+            >
+              Tahun Ajaran 2023 - 2024
+            </Text>
             <View style={styles.table}>
               <View style={styles.tableRow}>
                 <View

@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@nextui-org/react": "^0.0.0-dev-v2-20230724140319",
+    "@nextui-org/react": "^2.0.5",
     "@react-pdf/renderer": "^3.1.12",
     "autoprefixer": "10.4.14",
     "dayjs": "^1.11.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "firebase": "^10.0.0",
-    "framer-motion": "^10.13.1",
+    "framer-motion": "^10.15.1",
     "next": "13.4.10",
     "nextjs-progressbar": "^0.0.16",
     "postcss": "8.4.26",

@@ -2,7 +2,7 @@ import { Chip, Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import Head from "next/head";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,10 @@ export default function HasilSeleksi() {
   const snapshot = useRef(null);
   const [isLoading, setIsloading] = useState(true);
   const getDBFromFirestore = async () => {
-    const querySnapshot = query(collection(db, "pendaftaran"));
+    const querySnapshot = query(
+      collection(db, "pendaftaran"),
+      orderBy("nmlengkap", "asc")
+    );
     const gettt = await getDocs(querySnapshot);
     snapshot.current = gettt.docs;
     setTimeout(() => {
@@ -210,7 +213,6 @@ export default function HasilSeleksi() {
               })}
             </tbody>
           </table>
-          <h1 className="text-center">sss</h1>
         </div>
       </LayoutAdmin>
     );
