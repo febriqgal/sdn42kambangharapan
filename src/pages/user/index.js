@@ -76,7 +76,9 @@ export default function User() {
   } else {
     return (
       <LayoutUser>
-        <h1>Proses</h1>
+        <h1>
+          Pendaftaran anda sedang di proses mohon tunggu konfirmasi dari Admin
+        </h1>
       </LayoutUser>
     );
   }

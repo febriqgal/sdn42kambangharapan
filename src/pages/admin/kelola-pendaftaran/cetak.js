@@ -158,6 +158,19 @@ export default function Pdf() {
                 );
               })}
             </View>
+            <View style={{ marginTop: 60 }}>
+              <View>
+                <Text
+                  style={{ textAlign: "right", fontSize: 10 }}
+                >{`${dayjs().format("dddd, DD MMM YYYY")}`}</Text>
+
+                <Text
+                  style={{ textAlign: "right", fontSize: 10, marginTop: 30 }}
+                >
+                  Yuniza Rahmata, S.pd.
+                </Text>
+              </View>
+            </View>
           </Page>
         </Document>
       </PDFViewer>
