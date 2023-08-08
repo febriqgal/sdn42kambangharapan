@@ -375,7 +375,7 @@ const Pendaftaran = () => {
                 type="text"
                 id="prestasi"
                 className="w-full p-0 mt-1 border-none focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                {...register("prestasi", { required: true })}
+                {...register("prestasi", { required: false })}
               />
             </label>
             <label
